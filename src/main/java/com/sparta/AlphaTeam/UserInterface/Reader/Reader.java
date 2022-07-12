@@ -1,7 +1,6 @@
-package com.sparta.alphateam.UserInterface.Reader;
+package com.sparta.AlphaTeam.UserInterface.Reader;
 
-import com.sparta.alphateam.DataManagement.Employee;
-
+import com.sparta.AlphaTeam.DataManagement.Employee;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,7 +15,7 @@ public class Reader {
             while ((line = bufferedFileReader.readLine()) != null) {
                 String [] records = line.split(",");
                 for (int i = 0; i < records.length; i++) {
-                    records[i] = String.valueOf(new Employee());
+                    records[i] = String.valueOf(null);
                 }
             }
         } catch (FileNotFoundException e) {
