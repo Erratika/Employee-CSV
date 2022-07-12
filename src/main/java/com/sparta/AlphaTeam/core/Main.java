@@ -6,5 +6,6 @@ public class Main {
         sqlProgram.start();
 
         System.out.println("This is jeffrey's message");
+        System.out.println("This is Marcs message");
     }
 }
