@@ -1,4 +1,4 @@
-package com.sparta.alphateam.Controller;
+package com.sparta.AlphaTeam.Controller;
 
 import com.sparta.alphateam.DataManagement.DataManager;
 import com.sparta.alphateam.UserInterface.Reader.UserManager;
