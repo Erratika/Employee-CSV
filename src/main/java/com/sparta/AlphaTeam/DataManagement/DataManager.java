@@ -1,6 +1,6 @@
-package com.sparta.AlphaTeam;
+package com.sparta.alphateam.DataManagement;
 
-import com.sparta.AlphaTeam.Reader.Employee;
+import com.sparta.alphateam.DataManagement.Employee;
 
 import java.util.List;
 

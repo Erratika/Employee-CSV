@@ -1,4 +1,4 @@
-package com.sparta.AlphaTeam.Reader;
+package com.sparta.alphateam.DataManagement;
 
 import java.util.Date;
 

@@ -1,6 +1,6 @@
-package com.sparta.AlphaTeam;
+package com.sparta.alphateam.Controller;
 
-import com.sparta.AlphaTeam.Reader.Controller;
+import com.sparta.alphateam.Controller.Controller;
 
 public class SQLProgram {
 

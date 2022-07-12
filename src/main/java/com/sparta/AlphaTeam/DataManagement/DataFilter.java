@@ -1,8 +1,6 @@
-package com.sparta.AlphaTeam;
+package com.sparta.alphateam.DataManagement;
 
-import com.sparta.AlphaTeam.Reader.Employee;
-
-import java.util.List;
+import com.sparta.alphateam.DataManagement.Employee;
 
 public class DataFilter {
 

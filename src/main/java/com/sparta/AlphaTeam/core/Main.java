@@ -1,4 +1,4 @@
-package com.sparta.AlphaTeam;
+package com.sparta.alphateam.core;
 
 public class Main {
     public static void main(String[] args) {
