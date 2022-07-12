@@ -5,6 +5,8 @@ public class Main {
         SQLProgram sqlProgram = new SQLProgram();
         sqlProgram.start();
 
-        System.out.println("This is jeffrey's message");
+    }
+    public void sout(){
+        System.out.println("lol");
     }
 }
