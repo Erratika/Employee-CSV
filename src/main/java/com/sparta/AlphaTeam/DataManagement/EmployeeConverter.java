@@ -1,4 +1,4 @@
-package com.sparta.alphateam.DataManagement;
+package com.sparta.AlphaTeam.DataManagement;
 
 import com.sparta.alphateam.DataManagement.Employee;
 
