@@ -1,9 +1,16 @@
 package com.sparta.AlphaTeam.DataManagement;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class DataFilter {
+
+    private static Date parseDate(String string) throws ParseException {
+        SimpleDateFormat parser = new SimpleDateFormat("MM/dd/yyyy");
+        return (Date) parser.parse(string);
+    }
 
     public boolean filterMissing(Employee employee){
         int id = employee.getId();
@@ -16,16 +23,16 @@ public class DataFilter {
         return false;
     }
 
-    public boolean filterInvalidDate(Employee employee){
+    public boolean filterInvalidData(Employee employee) throws ParseException {
+        Date temp = parseDate("12/31/1999");
         int fName = employee.getfName().length();
         int lName = employee.getlName().length();
         String firstN = employee.getEmail().substring(0, fName);
         String lastN = employee.getEmail().substring(fName+1, lName);
-        //Avelina,I,Stoner,F, avelina.stoner@exxonmobil.com,
         if(employee.getDateOfBirth().before(employee.getJoinDate())){
             return true;
         }else{
-            if(employee.getDateOfBirth().before(new Date(19031231))) {
+            if(employee.getDateOfBirth().before(temp)){
                 return true;
             }else{
                 if((!employee.getfName().equals(firstN)) || (!employee.getlName().equals(lName))){ //email doesnt match name
