@@ -1,4 +1,4 @@
-package com.sparta.alphateam.Controller;
+package com.sparta.AlphaTeam.core;
 
 import com.sparta.alphateam.Controller.Controller;
 
