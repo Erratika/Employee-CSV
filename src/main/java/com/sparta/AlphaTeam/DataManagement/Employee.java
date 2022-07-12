@@ -1,22 +1,22 @@
 package com.sparta.AlphaTeam.DataManagement;
 
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Employee {
 
     private int id;
     private String prefix;
     private String fName;
-    private String mName;
+    private Character mName;
     private String lName;
-    private String gender;
+    private Character gender;
     private String email;
     private Date dateOfBirth;
     private Date joinDate;
     private int salary;
 
-    public Employee(int id, String prefix, String fName, String mName, String lName, String gender, String email, Date dob,
+    public Employee(int id, String prefix, String fName, Character mName, String lName, Character gender, String email, Date dob,
                     Date join, int salary){
         this.id= id;
         this.prefix= prefix;
@@ -57,7 +57,7 @@ public class Employee {
         return fName;
     }
 
-    public String getGender() {
+    public Character getGender() {
         return gender;
     }
 
@@ -65,7 +65,7 @@ public class Employee {
         return lName;
     }
 
-    public String getmName() {
+    public Character getmName() {
         return mName;
     }
 
@@ -85,7 +85,7 @@ public class Employee {
         this.fName = fName;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Character gender) {
         this.gender = gender;
     }
 
@@ -97,7 +97,7 @@ public class Employee {
         this.lName = lName;
     }
 
-    public void setName(String mName) {
+    public void setName(Character mName) {
         this.mName = mName;
     }
 

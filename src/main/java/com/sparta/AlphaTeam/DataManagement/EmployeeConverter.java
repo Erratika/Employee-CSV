@@ -6,39 +6,55 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class EmployeeConverter {
-    public static List<Employee> convertStringsToEmployees(List<String> input) throws ParseException {
-        ArrayList<Employee> employees = new ArrayList<>();
-        for (String line : input) {
-            String[] delimitedResult = line.split("[,\n]");
-            try {
-                int id = Integer.parseInt(delimitedResult[0]);
-            }catch (NumberFormatException e){
-                //TODO Handle
-            }
-            String prefix = delimitedResult[1];
-            String fName = delimitedResult[2];
+	public static List<Employee> convertStringsToEmployees(List<String> input) throws ParseException {
+		ArrayList<Employee> employees = new ArrayList<>();
+		for (String line : input) {
+			String[] delimitedResult = line.split("[,\n]");
+			int id;
 
-            //TODO what if char is null?
-            Character mInitial = delimitedResult[3].charAt(0);
+			//TODO Check with others how best to handle null integers and Characters.
+			try {
+				id = Integer.parseInt(delimitedResult[0]);
+			} catch (NumberFormatException e) {
+				id = 0;
+			}
+			String prefix = delimitedResult[1];
+			String fName = delimitedResult[2];
 
-            String lName = delimitedResult[4];
-            Character gender = delimitedResult[5].charAt(0);
-            String email = delimitedResult[6];
-            Date dateOfBirth = parseDate(delimitedResult[7]);
-            Date joinDate = parseDate(delimitedResult[8]);
-            try{
-                Integer salary = Integer.parseInt(delimitedResult[9]);
-            }catch (NumberFormatException e){
-                //TODO handle
-            }
-            employees.add(new Employee(id,prefix,fName,mInitial,lName,gender,email,dateOfBirth,joinDate,salary));
-        }
-        return employees;
-    }
-    private static Date parseDate(String string) throws ParseException {
-        SimpleDateFormat parser = new SimpleDateFormat("MM/dd/yyyy");
-        return parser.parse(string);
-    }
+			char mInitial;
+			try {
+				mInitial = delimitedResult[3].charAt(0);
+			} catch (StringIndexOutOfBoundsException e) {
+				throw new StringIndexOutOfBoundsException();
+			}
+
+			String lName = delimitedResult[4];
+
+			char gender;
+			try {
+				gender = delimitedResult[5].charAt(0);
+			} catch (StringIndexOutOfBoundsException e) {
+				throw new StringIndexOutOfBoundsException();
+			}
+			String email = delimitedResult[6];
+			Date dateOfBirth = parseDate(delimitedResult[7]);
+			Date joinDate = parseDate(delimitedResult[8]);
+			int salary;
+			try {
+				salary = Integer.parseInt(delimitedResult[9]);
+			} catch (NumberFormatException e) {
+				salary = 0;
+			}
+			employees.add(new Employee(id, prefix, fName, mInitial, lName, gender, email, dateOfBirth, joinDate, salary));
+		}
+		return employees;
+	}
+
+	private static Date parseDate(String string) throws ParseException {
+		SimpleDateFormat parser = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+		return parser.parse(string);
+	}
 }
