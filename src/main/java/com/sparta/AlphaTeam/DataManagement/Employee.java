@@ -1,6 +1,7 @@
-package com.sparta.alphateam.DataManagement;
+package com.sparta.AlphaTeam.DataManagement;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class Employee {
 
