@@ -17,20 +17,32 @@ public class DataFilter {
     }
 
     public boolean filterInvalidDate(Employee employee){
+        int fName = employee.getfName().length();
+        int lName = employee.getlName().length();
+        String firstN = employee.getEmail().substring(0, fName);
+        String lastN = employee.getEmail().substring(fName+1, lName);
+        //Avelina,I,Stoner,F, avelina.stoner@exxonmobil.com,
         if(employee.getDateOfBirth().before(employee.getJoinDate())){
             return true;
         }else{
             if(employee.getDateOfBirth().before(new Date(19031231))) {
                 return true;
             }else{
+                if((!employee.getfName().equals(firstN)) || (!employee.getlName().equals(lName))){ //email doesnt match name
+                    return true;
+                }
                 return false; //valid dates
             }
         }
     }
 
     public boolean filterDuplictes(Employee employee, List<Employee> list){
-        if(list.contains(employee)){
+        if(list.contains(employee.getlName()) && list.contains(employee.getfName())){
             return true;
+        }else{
+            if(list.contains(employee.getEmail()) || list.contains(employee)){
+                return true;
+            }
         }
         return false;
     }
