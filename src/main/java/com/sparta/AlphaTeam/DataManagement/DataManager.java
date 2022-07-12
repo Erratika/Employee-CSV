@@ -12,6 +12,10 @@ public class DataManager {
     private List <Employee> invalidDateRecords;
     private List <Employee> duplicatedRecords;
 
+    public void setupDatabase(){
+
+    }
+
     public void sortData(){
         //filter to populate all missing
         //filter to
