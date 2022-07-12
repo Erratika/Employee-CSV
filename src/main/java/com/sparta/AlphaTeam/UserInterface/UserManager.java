@@ -1,6 +1,6 @@
 package com.sparta.AlphaTeam.UserInterface;
 
-import com.sparta.alphateam.DataManagement.Employee;
+import com.sparta.AlphaTeam.DataManagement.Employee;
 
 import java.util.List;
 

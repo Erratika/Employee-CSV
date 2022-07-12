@@ -28,6 +28,9 @@ public class Employee {
         this.joinDate= join;
         this.salary= salary;
     }
+    public Employee(){
+
+    }
 
     public Date getDateOfBirth() {
         return dateOfBirth;

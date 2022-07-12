@@ -1,8 +1,11 @@
 package com.sparta.AlphaTeam.DataManagement.Database;
 
+import com.sparta.AlphaTeam.DataManagement.Employee;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class DatabaseInit {
 
@@ -12,7 +15,7 @@ public class DatabaseInit {
             statement.executeUpdate("DROP TABLE IF EXISTS employees");
 
             String sql = "CREATE TABLE `employees`" +
-                    " (`emplyee_id` int NOT NULL," +
+                    " (`employee_id` int NOT NULL," +
                     "`prefix` varchar(10) DEFAULT NULL," +
                     "`first_name` varchar(45) DEFAULT NULL," +
                     "`middle_initial` char(1) DEFAULT NULL," +
@@ -36,5 +39,7 @@ public class DatabaseInit {
 
         ConnectionFactory.closeConnection();
     }
+
+
 
 }
