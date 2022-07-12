@@ -1,6 +1,7 @@
-package com.sparta.AlphaTeam.Reader;
+package com.sparta.AlphaTeam.Controller;
 
-import com.sparta.AlphaTeam.DataManager;
+import com.sparta.alphateam.DataManagement.DataManager;
+import com.sparta.AlphaTeam.UserInterface.UserManager;
 
 public class Controller {
     UserManager userManager=new UserManager();

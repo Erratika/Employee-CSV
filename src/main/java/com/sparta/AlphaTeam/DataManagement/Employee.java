@@ -1,4 +1,4 @@
-package com.sparta.AlphaTeam.Reader;
+package com.sparta.AlphaTeam.DataManagement;
 
 import java.util.Date;
 
@@ -15,8 +15,8 @@ public class Employee {
     private Date joinDate;
     private int salary;
 
-    Employee(int id, String prefix, String fName, String mName, String lName, String gender, String email, Date dob,
-             Date join, int salary){
+    public Employee(int id, String prefix, String fName, String mName, String lName, String gender, String email, Date dob,
+                    Date join, int salary){
         this.id= id;
         this.prefix= prefix;
         this.fName= fName;

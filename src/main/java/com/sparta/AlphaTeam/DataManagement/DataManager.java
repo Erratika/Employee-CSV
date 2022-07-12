@@ -1,6 +1,6 @@
-package com.sparta.AlphaTeam;
+package com.sparta.alphateam.DataManagement;
 
-import com.sparta.AlphaTeam.Reader.Employee;
+import com.sparta.alphateam.DataManagement.Employee;
 
 import java.util.List;
 
@@ -11,6 +11,10 @@ public class DataManager {
     private List <Employee> missingValueRecords;
     private List <Employee> invalidDateRecords;
     private List <Employee> duplicatedRecords;
+
+    public void setupDatabase(){
+
+    }
 
     public void sortData(){
         //filter to populate all missing
