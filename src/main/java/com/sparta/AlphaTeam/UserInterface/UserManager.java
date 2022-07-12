@@ -1,6 +1,6 @@
-package com.sparta.alphateam.UserInterface.Reader;
+package com.sparta.AlphaTeam.UserInterface;
 
-import com.sparta.alphateam.DataManagement.Employee;
+import com.sparta.AlphaTeam.DataManagement.Employee;
 
 import java.util.List;
 
@@ -10,4 +10,5 @@ public class UserManager {
             System.out.println(e);
         }
     }
+
 }

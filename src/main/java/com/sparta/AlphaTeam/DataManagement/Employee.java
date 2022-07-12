@@ -1,6 +1,7 @@
-package com.sparta.alphateam.DataManagement;
+package com.sparta.AlphaTeam.DataManagement;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class Employee {
 
@@ -15,8 +16,8 @@ public class Employee {
     private Date joinDate;
     private int salary;
 
-    Employee(int id, String prefix, String fName, String mName, String lName, String gender, String email, Date dob,
-             Date join, int salary){
+    public Employee(int id, String prefix, String fName, String mName, String lName, String gender, String email, Date dob,
+                    Date join, int salary){
         this.id= id;
         this.prefix= prefix;
         this.fName= fName;
@@ -27,6 +28,9 @@ public class Employee {
         this.dateOfBirth= dob;
         this.joinDate= join;
         this.salary= salary;
+    }
+    public Employee(){
+
     }
 
     public Date getDateOfBirth() {
