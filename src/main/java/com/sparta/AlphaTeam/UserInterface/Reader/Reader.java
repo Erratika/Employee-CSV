@@ -1,30 +1,25 @@
-package com.sparta.alphateam.UserInterface.Reader;
-
-import com.sparta.alphateam.DataManagement.Employee;
-
+package com.sparta.AlphaTeam.UserInterface.Reader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Reader {
-    public static void readFile(String employeeFile) {
+    public static List readFile(String filePath) {
 
-        try(FileReader fileReader = new FileReader(employeeFile);
-            BufferedReader bufferedFileReader = new BufferedReader(fileReader);) {
-            String line;
-            while ((line = bufferedFileReader.readLine()) != null) {
-                String [] records = line.split(",");
-                for (int i = 0; i < records.length; i++) {
-                    records[i] = String.valueOf(new Employee());
-                }
+        try (Scanner scan = new Scanner(new FileReader(filePath)).useDelimiter(",\\s*")) {
+            List<String> employeeStringList = new ArrayList<>();
+            String dataString;
+            while (scan.hasNext()) {
+                dataString = scan.next();
+                employeeStringList.add(dataString);
             }
+            return employeeStringList;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
