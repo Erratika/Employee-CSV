@@ -10,23 +10,25 @@ public class CustomThreadFactory implements ThreadFactory {
 //        return threadCount;
 //    }
 
-    @Override
-    public Thread newThread(Runnable r) {
+	@Override
+	public Thread newThread(Runnable r) {
 
 //        threadCount++;
-        return new Thread(r);
-    }
-    public void customThreadFactory(int threadCount, List<Employee> employeeList){
-        Thread[] threadArray = new Thread[threadCount];
-        Employee[][] employeeNestedArray = new Employee[threadCount][];
-        int remainder = employeeList.toArray().length % threadCount;
-        employeeList.toArray();
-        for (int i = 0; i < employeeList.toArray().length) {
-            for (int j = 0; j < ){
+		return new Thread(r);
+	}
 
-            }
-        }
+	public void customThreadFactory(int threadCount, List<Employee> employeeList) {
+		Thread[] threadArray = new Thread[threadCount];
+		Employee[][] employeeNestedArray = new Employee[threadCount][];
+		int remainder = employeeList.toArray().length % threadCount;
+		employeeList.toArray();
+		for (int i = 0; i < employeeList.toArray().length; i++) {
+			//for (int j = 0; j < ){
+			System.out.println();
+
+		}
+	}
 
 
-    }
 }
+

@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Reader {
     public static List<String> readFile(String filePath) {
 
-        try (Scanner scan = new Scanner(new FileReader(filePath)).useDelimiter(",\\s*")) {
+        try (Scanner scan = new Scanner(new FileReader(filePath)).useDelimiter("\r\n")) {
             List<String> employeeStringList = new ArrayList<>();
             String dataString;
             scan.nextLine();
