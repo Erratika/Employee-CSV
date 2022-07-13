@@ -1,6 +1,6 @@
 package com.sparta.AlphaTeam.Controller;
 
-import com.sparta.alphateam.DataManagement.DataManager;
+import com.sparta.AlphaTeam.DataManagement.DataManager;
 import com.sparta.AlphaTeam.UserInterface.UserManager;
 
 public class Controller {

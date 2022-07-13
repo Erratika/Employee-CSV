@@ -1,7 +1,5 @@
 package com.sparta.AlphaTeam.DataManagement;
 
-import com.sparta.alphateam.DataManagement.Employee;
-
 public class DataFilter {
 
     public boolean filterMissing(Employee employee){
@@ -9,7 +7,7 @@ public class DataFilter {
     }
 
     public boolean filterInvalidDate(Employee employee){
-        if()
+//        if()
         //invalid data:
         //if birth date is before join date
         //if birth date is before 1904
