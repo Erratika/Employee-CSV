@@ -25,10 +25,10 @@ import java.util.Optional;
 public class EmployeeDAO implements DAO<Employee> {
 
     List<Employee> employeeList= new ArrayList<>();
-    Connection connection = ConnectionFactory.getConnection();
 
     public List<Employee> getAll(){
-        try {
+                try(Connection connection = ConnectionFactory.getConnection();
+        ) {
             PreparedStatement stmt =connection.prepareStatement("SELECT * FROM employees ");
             ResultSet rs =stmt.executeQuery();
             while(rs.next()){
@@ -38,11 +38,13 @@ public class EmployeeDAO implements DAO<Employee> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         return employeeList;
     }
     @Override
     public void add(Employee employee){
-        try {
+        try(Connection connection = ConnectionFactory.getConnection();
+        ) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO employees VALUES (?,?,?,?,?,?,?,?,?,?)");
             statement.setInt(1,employee.getId());
             statement.setString(2,employee.getPrefix());
@@ -65,7 +67,8 @@ public class EmployeeDAO implements DAO<Employee> {
     }
     @Override
     public void delete(int id){
-        try {
+        try(Connection connection = ConnectionFactory.getConnection();
+        ) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM employees WHERE id = ?");
             statement.setInt(1,id);
             statement.executeUpdate();
@@ -76,7 +79,7 @@ public class EmployeeDAO implements DAO<Employee> {
 
     @Override
     public Optional<Employee> get(int id){
-        try {
+        try(Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM employees where id == (?)");
             statement.setInt(1,id);
             ResultSet resultSet = statement.getResultSet();
