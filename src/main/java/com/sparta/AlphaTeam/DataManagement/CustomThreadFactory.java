@@ -18,7 +18,14 @@ public class CustomThreadFactory implements ThreadFactory {
     }
     public void customThreadFactory(int threadCount, List<Employee> employeeList){
         Thread[] threadArray = new Thread[threadCount];
-        Employee[][] powerRangers = new Employee[threadCount][];
+        Employee[][] employeeNestedArray = new Employee[threadCount][];
+        int remainder = employeeList.toArray().length % threadCount;
+        employeeList.toArray();
+        for (int i = 0; i < employeeList.toArray().length) {
+            for (int j = 0; j < ){
+
+            }
+        }
 
 
     }
