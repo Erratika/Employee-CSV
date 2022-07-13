@@ -2,6 +2,7 @@ package com.sparta.AlphaTeam.Controller;
 
 import com.sparta.AlphaTeam.DataManagement.DataManager;
 import com.sparta.AlphaTeam.UserInterface.UserManager;
+import com.sparta.AlphaTeam.core.FileEnum;
 
 public class Controller {
     UserManager userManager=new UserManager();
@@ -10,8 +11,9 @@ public class Controller {
     public void collectFileToUse(){
         // fetch method method eg. UserManager.getFilepath()
         // temporary placheolder
-        String temp = "src/main/resources/EmployeeRecords1.csv";
-        dataManager.setChosenFile(temp);
+        FileEnum temp =  userManager.getFileNumber();
+        String filePath = temp.getFilePath();
+        dataManager.setChosenFile(filePath);
     }
 
     public void convertFileToEmployee(){

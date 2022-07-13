@@ -2,6 +2,7 @@ package com.sparta.AlphaTeam.UserInterface;
 
 import com.sparta.AlphaTeam.DataManagement.Employee;
 import com.sparta.AlphaTeam.UserInterface.Reader.Reader;
+import com.sparta.AlphaTeam.core.FileEnum;
 
 import java.io.File;
 import java.util.InputMismatchException;
@@ -45,7 +46,7 @@ public class UserManager {
         while(userChoosing){
             int fileNumber = sc.nextInt();
             for(FileEnum s: FileEnum.values()){
-                if(s.getSortKey() == fileNumber){
+                if(s.getEnumKey() == fileNumber){
                     userChoosing = false;
                     file = s;
                 }
