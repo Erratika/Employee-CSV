@@ -1,5 +1,9 @@
 package com.sparta.AlphaTeam.DataManagement;
 
+import com.sparta.AlphaTeam.DataManagement.Employee;
+
+import java.util.List;
+
 public class DataManager {
     private List <Employee> unsortedRecords;
     private List <Employee> cleanRecords;
