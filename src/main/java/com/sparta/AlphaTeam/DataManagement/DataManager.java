@@ -1,10 +1,14 @@
 package com.sparta.AlphaTeam.DataManagement;
 
-import com.sparta.AlphaTeam.DataManagement.Employee;
-
+import java.io.File;
+import java.text.ParseException;
 import java.util.List;
 
 public class DataManager {
+
+
+    private File chosenFile;
+    private List <String> dataString;
     private List <Employee> unsortedRecords;
     private List <Employee> cleanRecords;
     private List <Employee> allDirtyRecords;
@@ -12,8 +16,50 @@ public class DataManager {
     private List <Employee> invalidDateRecords;
     private List <Employee> duplicatedRecords;
 
+
+    public DataManager() {
+    }
+
     public void setupDatabase(){
 
+    }
+    public void sortUnsortedRecords(){
+        DataFilter dataFilter= new DataFilter();
+        boolean isDirty = false;
+        for (Employee e : unsortedRecords) {
+            isDirty = false;
+
+            try {if (dataFilter.filterInvalidData(e)){
+                invalidDateRecords.add(e);
+                isDirty=true;}
+            } catch (ParseException ex) {
+                ex.printStackTrace();}
+
+            if (dataFilter.filterMissing(e)){
+                missingValueRecords.add(e);
+                isDirty=true;
+            }
+
+            if (dataFilter.filterDuplictes(e,cleanRecords)){
+                duplicatedRecords.add(e);
+                isDirty=true;
+            }
+
+            if (isDirty){
+                allDirtyRecords.add(e);
+            }
+            else {
+                cleanRecords.add(e);
+            }
+        }
+    }
+
+    public void convertStringListToEmployee(List<String> inputList){
+        try {
+            unsortedRecords=EmployeeConverter.convertStringsToEmployees(inputList);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public void sortData(){
@@ -22,6 +68,21 @@ public class DataManager {
     }
 
     //---------------------GETTERS AND SETTERS------------------
+    public File getChosenFile() {
+        return chosenFile;
+    }
+
+    public void setChosenFile(String filePath) {
+        this.chosenFile = new File(filePath);
+    }
+
+    public List<String> getDataString() {
+        return dataString;
+    }
+
+    public void setDataString(List<String> dataString) {
+        this.dataString = dataString;
+    }
     public List<Employee> getAllDirtyRecords() {
         return allDirtyRecords;
     }

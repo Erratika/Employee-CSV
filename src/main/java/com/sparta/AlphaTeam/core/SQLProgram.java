@@ -6,6 +6,11 @@ public class SQLProgram {
 
     public void start(){
         Controller controller = new Controller();
+
+        controller.collectFileToUse();
+        controller.convertFileToEmployee();
+        controller.filterRecords();
+        controller.displayCleanRecords();
     }
 
 
