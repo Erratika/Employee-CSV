@@ -13,6 +13,7 @@ public class Reader {
         try (Scanner scan = new Scanner(new FileReader(filePath)).useDelimiter(",\\s*")) {
             List<String> employeeStringList = new ArrayList<>();
             String dataString;
+            scan.nextLine();
             while (scan.hasNext()) {
                 dataString = scan.next();
                 employeeStringList.add(dataString);

@@ -9,16 +9,20 @@ public class Controller {
     DataManager dataManager=new DataManager();
 
     public void collectFileToUse(){
-        FileEnum temp =  userManager.getFileNumber();
+        FileEnum temp =  userManager.getFileENumber();
         String filePath = temp.getFilePath();
         dataManager.setChosenFile(filePath);
     }
-    public void numberOfThreads(){
+    public void getNumberOfThreads(){
         // int threads = userManager.getInputInt();
         int threads = userManager.getUserThread();
     }
     public void convertFileToEmployee(){
         dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
+    }
+
+    public void filterRecords(){
+        dataManager.sortData();
     }
 
     public void displayCleanRecords(){
