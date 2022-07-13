@@ -15,7 +15,11 @@ public class Controller {
         String filePath = temp.getFilePath();
         dataManager.setChosenFile(filePath);
     }
-
+    public int numberOfThreads(){
+        userManager.promt("How many threads would you like to use?");
+        int threads = userManager.getInputInt();
+        return threads;
+    }
     public void convertFileToEmployee(){
         dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
     }
