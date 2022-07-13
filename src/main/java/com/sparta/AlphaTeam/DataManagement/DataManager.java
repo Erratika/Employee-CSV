@@ -22,6 +22,7 @@ public class DataManager {
     }
 
     //---------------------GETTERS AND SETTERS------------------
+
     public List<Employee> getAllDirtyRecords() {
         return allDirtyRecords;
     }

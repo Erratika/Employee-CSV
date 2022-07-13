@@ -23,4 +23,5 @@ public class Controller {
         userManager.displayRecords(dataManager.getCleanRecords());
     }
 
+
 }

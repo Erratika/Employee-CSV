@@ -15,7 +15,6 @@ public class UserManager {
     public void promt(String string){
         System.out.println(string);
     }
-
     public void promt(int x){
         System.out.println(x);
     }
@@ -34,7 +33,7 @@ public class UserManager {
         return temp;//users decision
     }
 
-
-
-
+    public void displayEmployee(Employee e){
+        System.out.println(e);
+    }
 }
