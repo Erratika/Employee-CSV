@@ -23,6 +23,37 @@ public class DataManager {
     public void setupDatabase(){
 
     }
+    public void sortUnsortedRecords(){
+        DataFilter dataFilter= new DataFilter();
+        boolean isDirty = false;
+        for (Employee e : unsortedRecords) {
+            isDirty = false;
+
+            try {if (dataFilter.filterInvalidData(e)){
+                invalidDateRecords.add(e);
+                isDirty=true;}
+            } catch (ParseException ex) {
+                ex.printStackTrace();}
+
+            if (dataFilter.filterMissing(e)){
+                missingValueRecords.add(e);
+                isDirty=true;
+            }
+
+            if (dataFilter.filterDuplictes(e,cleanRecords)){
+                duplicatedRecords.add(e);
+                isDirty=true;
+            }
+
+            if (isDirty){
+                allDirtyRecords.add(e);
+            }
+            else {
+                cleanRecords.add(e);
+            }
+        }
+    }
+
     public void convertStringListToEmployee(List<String> inputList){
         try {
             unsortedRecords=EmployeeConverter.convertStringsToEmployees(inputList);

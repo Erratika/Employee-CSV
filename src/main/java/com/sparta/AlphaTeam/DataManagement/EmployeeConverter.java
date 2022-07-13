@@ -19,7 +19,7 @@ public class EmployeeConverter {
 	public static List<Employee> convertStringsToEmployees(List<String> input) throws ParseException, IndexOutOfBoundsException {
 		ArrayList<Employee> employees = new ArrayList<>();
 		for (String line : input) {
-			String[] delimitedResult = line.split("[,\n]");
+			String[] delimitedResult = line.split(",");
 			int id;
 
 			try {

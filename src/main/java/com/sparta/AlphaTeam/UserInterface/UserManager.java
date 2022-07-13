@@ -44,8 +44,8 @@ public class UserManager {
         }
         return temp;//users decision
     }
-    public FileEnum getFileNumber(){
-        Scanner sc = new Scanner(System.in);
+    public FileEnum getFileENumber(){
+        /*Scanner sc = new Scanner(System.in);
         FileEnum file = null;
         boolean userChoosing = true;
         while(userChoosing){
@@ -60,7 +60,15 @@ public class UserManager {
                 promt("Please enter a valid number corresponding to a File path");
             }
         }
-        return file;
+        return file;*/
+        FileEnum fileEnum;
+        System.out.println("Please select a file to use by typing its number:");
+        for (FileEnum s : FileEnum.values()){ // prints a list to the user of all enums in the list representing the different sort methods
+            System.out.println(s.getEnumKey()+ ". " +s.getFileName());
+        }
+
+        fileEnum= ChooseTools.getUserEnum(); // selection module to return an enum for storage related to the list available
+        return  fileEnum;
     }
     private static class ChooseTools{
         public static int getUserArrayLength(){
@@ -75,6 +83,28 @@ public class UserManager {
                 }
             }
             return  userValue;
+        }
+        public static FileEnum getUserEnum(){
+            Scanner scanner = new Scanner(System.in);
+            FileEnum fileEnum=FileEnum.EMPLOYEERECORDS1;
+            boolean userChoosing = true;
+            String userInput;
+            int userInputAsInt;
+
+            while (userChoosing) {
+                userInput = scanner.next();
+                userInputAsInt= StringConverter.stringToInt(userInput); // personalised string-to int converter, reads for any ints and always returns positive
+                for (FileEnum s : FileEnum.values()){ // checks through the list of enums to see if the input key matches user input key then returns relevant enum
+                    if (s.getEnumKey()==userInputAsInt){
+                        userChoosing=false;
+                        fileEnum=s;
+                    }
+                }
+                if (userChoosing){
+                    System.out.println("please check you entered a valid number\n \nPlease enter a number corresponding to a file");
+                }
+            }
+            return fileEnum;
         }
 
     }
