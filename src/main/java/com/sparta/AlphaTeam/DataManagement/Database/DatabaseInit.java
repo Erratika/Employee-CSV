@@ -15,7 +15,7 @@ public class DatabaseInit {
             statement.executeUpdate("DROP TABLE IF EXISTS employees");
 
             String sql = "CREATE TABLE `employees`" +
-                    " (`employee_id` int NOT NULL," +
+                    " (`id` int NOT NULL," +
                     "`prefix` varchar(10) DEFAULT NULL," +
                     "`first_name` varchar(45) DEFAULT NULL," +
                     "`middle_initial` char(1) DEFAULT NULL," +
@@ -25,7 +25,7 @@ public class DatabaseInit {
                     "`date_of_birth` date DEFAULT NULL," +
                     "`date_of_joining` date DEFAULT NULL," +
                     "`salary` int DEFAULT NULL," +
-                    " PRIMARY KEY (`emplyee_id`)," +
+                    " PRIMARY KEY (`id`)," +
                     " UNIQUE KEY `email_UNIQUE` (`email`))" +
                     " ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 " +
                     "COLLATE=utf8mb4_0900_ai_ci";

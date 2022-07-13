@@ -24,7 +24,6 @@ public class DataFilter {
         return false;
     }
 
-
     public boolean filterInvalidData(Employee employee) throws ParseException {
         Date temp = parseDate("12/31/1999");
         int fName = employee.getfName().length();
@@ -37,7 +36,7 @@ public class DataFilter {
             if(employee.getDateOfBirth().before(temp)){
                 return true;
             }else{
-                if((!employee.getfName().equals(firstN)) || (!employee.getlName().equals(lName))){ //email doesnt match name
+                if((!employee.getfName().equals(firstN)) || (!employee.getlName().equals(lastN))){ //email doesnt match name
                     return true;
                 }
                 return false; //valid dates
