@@ -20,29 +20,29 @@ public class DataFilterTests {
     @BeforeEach
     void setUp(){dataFilter = new DataFilter();}
     Employee missing = new Employee(-1,  "Miss", "Kira", 'G', "Coke", 'F', "kcoke@spartaglobal.com"
-            ,(parser.parse("19991103")), (parser.parse("20220620")), 21000);
+            ,(parser.parse("11031999")), (parser.parse("06202022")), 21000);
     Employee invalid1 = new Employee(123127,  "Miss", "Kira", 'G', "Coke", 'F', "kcoke@spartaglobal.com"
-            ,(parser.parse("19021103")), (parser.parse("20220620")), 21000);
+            ,(parser.parse("1103199")), (parser.parse("06202022")), 21000);
     Employee invalid2 = new Employee(123918,  "Miss", "Kira", 'G', "Coke", 'F', "kcoke@spartaglobal.com"
-            ,(parser.parse("19991103")), (parser.parse("19970620")), 21000);
+            ,(parser.parse("11031999")), (parser.parse("06202022")), 21000);
     Employee invalid3 = new Employee(213917,  "Miss", "Kira", 'G', "Coke", 'F', "kcoker@spartaglobal.com"
-            ,(parser.parse("19991103")), (parser.parse("19970620")), 21000);
+            ,(parser.parse("11031999")), (parser.parse("06202022")), 21000);
     Employee clean = new Employee(290333, "Miss", "Kira", 'G', "Coke", 'F', "kcoke@spartaglobal.com"
-            ,(parser.parse("19991103")), (parser.parse("20220620")), 21000);
+            ,(parser.parse("11031999")), (parser.parse("06202022")), 21000);
     Employee clean2 = new Employee(79820, "Miss", "Lira", 'G', "Coke", 'F', "kcoke@spartaglobal.com"
-            ,(parser.parse("19991103")), (parser.parse("20220620")), 21000);
+            ,(parser.parse("11031999")), (parser.parse("06202022")), 21000);
     Employee clean3 =  new Employee(902321, "Mr", "Kira", 'G', "Coke", 'F', "kcoke@spartaglobal.com"
-            ,(parser.parse("19991103")), (parser.parse("20220620")), 21000);
+            ,(parser.parse("11031999")), (parser.parse("06202022")), 21000);
     Employee clean4 =  new Employee(78291, "Miss", "Suzy", 'G', "Coke", 'F', "scoke@spartaglobal.com"
-            ,(parser.parse("19981103")), (parser.parse("20220620")), 22000);
+            ,(parser.parse("11031999")), (parser.parse("06202022")), 22000);
     Employee clean5 =  new Employee(87782, "Mr", "Kira", 'G', "Coke", 'F', "kcoke@spartaglobal.com"
-            ,(parser.parse("19991103")), (parser.parse("20220620")), 21000);
+            ,(parser.parse("11031999")), (parser.parse("06202022")), 21000);
 
     Employee duplicate1= new Employee(290333, "Mr", "Kira", 'G', "Coke", 'F', "kcoke@spartaglobal.com"
-            ,(parser.parse("19991103")), (parser.parse("20220620")), 21000);
+            ,(parser.parse("11031999")), (parser.parse("06202022")), 21000);
 
     Employee duplicate2= new Employee(12830, "Mr", "Kira", 'G', "Coke", 'F', "kcoke@spartaglobal.com"
-            ,(parser.parse("19991103")), (parser.parse("20220620")), 21000);
+            ,(parser.parse("11031999")), (parser.parse("06202022")), 21000);
 
     @Test
     public void missingTest(){
