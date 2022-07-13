@@ -7,6 +7,17 @@ public class Controller {
     UserManager userManager=new UserManager();
     DataManager dataManager=new DataManager();
 
+    public void collectFileToUse(){
+        // fetch method method eg. UserManager.getFilepath()
+        // temporary placheolder
+        String temp = "src/main/resources/EmployeeRecords1.csv";
+        dataManager.setChosenFile(temp);
+    }
+
+    public void convertFileToEmployee(){
+        dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
+    }
+
     public void displayCleanRecords(){
         userManager.displayRecords(dataManager.getCleanRecords());
     }
