@@ -9,13 +9,14 @@ public class Controller {
     DataManager dataManager=new DataManager();
 
     public void collectFileToUse(){
-        // fetch method method eg. UserManager.getFilepath()
-        // temporary placheolder
         FileEnum temp =  userManager.getFileNumber();
         String filePath = temp.getFilePath();
         dataManager.setChosenFile(filePath);
     }
-
+    public void numberOfThreads(){
+        // int threads = userManager.getInputInt();
+        int threads = userManager.getUserThread();
+    }
     public void convertFileToEmployee(){
         dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
     }
