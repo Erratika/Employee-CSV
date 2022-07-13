@@ -38,12 +38,12 @@ public class DatabaseAccess {
             }
             rs.first();
             int i=0;
-            while (rs.next(){
+            while (rs.next()){
                 employeeList.get(i).setId(rs.getInt(1));
                 i++;
             }
-            rs.first()
-            i=0
+            rs.first();
+            i=0;
 
 
 
