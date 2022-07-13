@@ -22,29 +22,26 @@ public class EmployeeConverter {
 			String[] delimitedResult = line.split("[,\n]");
 			int id;
 
-			//TODO Check with others how best to handle null integers and Characters.
 			try {
 				id = Integer.parseInt(delimitedResult[0]);
 			} catch (NumberFormatException e) {
-				id = 0;
+				id = -1;
 			}
 			String prefix = delimitedResult[1];
 			String fName = delimitedResult[2];
 
-			char mInitial;
+			Character mInitial;
 			try {
 				mInitial = delimitedResult[3].charAt(0);
 			} catch (StringIndexOutOfBoundsException e) {
-				throw new StringIndexOutOfBoundsException();
+				mInitial = null;
 			}
-
 			String lName = delimitedResult[4];
-
-			char gender;
+			Character gender;
 			try {
 				gender = delimitedResult[5].charAt(0);
 			} catch (StringIndexOutOfBoundsException e) {
-				throw new StringIndexOutOfBoundsException();
+				gender = null;
 			}
 			String email = delimitedResult[6];
 			Date dateOfBirth = parseDate(delimitedResult[7]);
@@ -53,7 +50,7 @@ public class EmployeeConverter {
 			try {
 				salary = Integer.parseInt(delimitedResult[9]);
 			} catch (NumberFormatException e) {
-				salary = 0;
+				salary = -1;
 			}
 			employees.add(new Employee(id, prefix, fName, mInitial, lName, gender, email, dateOfBirth, joinDate, salary));
 		}

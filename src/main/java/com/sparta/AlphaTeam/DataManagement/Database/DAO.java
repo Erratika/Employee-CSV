@@ -3,18 +3,12 @@ package com.sparta.AlphaTeam.DataManagement.Database;
 import com.sparta.AlphaTeam.DataManagement.Employee;
 
 import java.util.List;
+import java.util.Optional;
 
-public class DAO {
-    public List<Employee> getAllEmployees(){
-    return null;
-    }
-    public void addEmployee(){
+public interface DAO<T> {
 
-    }
-    public void deleteEmployee(){
-
-    }
-    public void updateEmployee(){
-
-    }
+    Optional<T> get(int id);
+    List<T> getAll();
+    void add(T t);
+    void delete(int id);
 }
