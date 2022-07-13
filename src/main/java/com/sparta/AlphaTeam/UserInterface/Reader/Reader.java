@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Reader {
-    public static List readFile(String filePath) {
+    public static List<String> readFile(String filePath) {
 
         try (Scanner scan = new Scanner(new FileReader(filePath)).useDelimiter(",\\s*")) {
             List<String> employeeStringList = new ArrayList<>();
