@@ -65,17 +65,6 @@ public class EmployeeDAO implements DAO<Employee> {
         }
 
     }
-    @Override
-    public void delete(int id){
-        try(Connection connection = ConnectionFactory.getConnection();
-        ) {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM employees WHERE id = ?");
-            statement.setInt(1,id);
-            statement.executeUpdate();
-        }catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     @Override
     public Optional<Employee> get(int id){
