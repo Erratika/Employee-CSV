@@ -11,7 +11,6 @@ import java.util.List;
 public class DataFilterTests {
     SimpleDateFormat parser = new SimpleDateFormat("MM/dd/yyyy");
     DataFilter dataFilter;
-    List <Employee> list = new ArrayList<Employee>();
 
     public DataFilterTests() throws ParseException {
     }
@@ -21,10 +20,10 @@ public class DataFilterTests {
     Employee missing = new Employee(-1,  "Miss", "Kira", 'G', "Coke", 'F', "kcoke@spartaglobal.com"
             ,(parser.parse("11/03/1999")), (parser.parse("06/20/2022")), 21000);
     Employee invalid1 = new Employee(123127,  "Miss", "Kira", 'G', "Coke", 'F', "kira.coke@spartaglobal.com"
-            ,(parser.parse("11/03/99")), (parser.parse("06/20/2022")), 21000);
+            ,(parser.parse("11/03/1901")), (parser.parse("06/20/2022")), 21000);
     Employee invalid2 = new Employee(123918,  "Miss", "Kira", 'G', "Coke", 'F', "kira.coke@spartaglobal.com"
-            ,(parser.parse("11/03/1999")), (parser.parse("06/20/2022")), 21000);
-    Employee invalid3 = new Employee(213917,  "Miss", "Kira", 'G', "Coke", 'F', "kira.coker@spartaglobal.com"
+            ,(parser.parse("11/03/2023")), (parser.parse("06/20/2022")), 21000);
+    Employee invalid3 = new Employee(213917,  "Miss", "Kira", 'G', "Coke", 'F', "kira.cokre@spartaglobal.com"
             ,(parser.parse("11/03/1999")), (parser.parse("06/20/2022")), 21000);
     Employee clean = new Employee(290333, "Miss", "Kira", 'G', "Coke", 'F', "kira.coke@spartaglobal.com"
             ,(parser.parse("11/03/1999")), (parser.parse("06/20/2022")), 21000);
@@ -34,12 +33,11 @@ public class DataFilterTests {
             ,(parser.parse("11/03/1999")), (parser.parse("06/20/2022")), 21000);
     Employee clean4 =  new Employee(78291, "Miss", "Suzy", 'G', "Coke", 'F', "sira.coke@spartaglobal.com"
             ,(parser.parse("11/03/1999")), (parser.parse("06/20/2022")), 22000);
-    Employee clean5 =  new Employee(87782, "Mr", "Kira", 'G', "Coke", 'F', "kira.coke@spartaglobal.com"
+    Employee clean5 =  new Employee(87782, "Miss", "Bira", 'G', "Coke", 'F', "bira.coke@spartaglobal.com"
             ,(parser.parse("11/03/1999")), (parser.parse("06/20/2022")), 21000);
 
     Employee duplicate1= new Employee(290333, "Miss", "Kira", 'G', "Coke", 'F', "kira.coke@spartaglobal.com"
             ,(parser.parse("11/03/1999")), (parser.parse("06/20/2022")), 21000);
-
     Employee duplicate2= new Employee(7982, "Miss", "Lira", 'G', "Coke", 'F', "kira.coke@spartaglobal.com"
             ,(parser.parse("11/03/1999")), (parser.parse("06/20/2022")), 21000);
 
@@ -57,19 +55,23 @@ public class DataFilterTests {
     }
     @Test
     public void duplicatesTest(){
+        List<Employee> list = new ArrayList<>();
         list.add(clean);
         list.add(clean2);
+        System.out.println(list.size());
         Assertions.assertTrue(dataFilter.filterDuplictes(duplicate1, list));
         Assertions.assertTrue(dataFilter.filterDuplictes(duplicate2,list));
+
     }
     @Test
     public void cleanTests() throws ParseException {
-        list.add(clean);
-        list.add(clean2);
-        list.add(clean3);
+        List<Employee> list2 = new ArrayList<>();
+        list2.add(clean);
+        list2.add(clean2);
+        list2.add(clean3);
         Assertions.assertFalse(dataFilter.filterMissing(clean));
         Assertions.assertFalse(dataFilter.filterInvalidData(clean));
-        Assertions.assertFalse(dataFilter.filterDuplictes(clean4, list));
-        Assertions.assertFalse(dataFilter.filterDuplictes(clean5, list));
+        Assertions.assertFalse(dataFilter.filterDuplictes(clean4, list2));
+        Assertions.assertFalse(dataFilter.filterDuplictes(clean5, list2));
     }
 }

@@ -32,6 +32,13 @@ public class Employee {
     public Employee(){
 
     }
+    @Override
+    public String toString(){
+        String test = String.format("%-7s%-6s%-14s%-5s%-15s%-3s%-35s%-35s%-35s %-10s", id, prefix, fName, mName, lName,gender,email,dateOfBirth,joinDate,salary);
+        String toString = (id + "," + prefix + "," + fName + "," + mName + "," + lName + "," + gender + "," + email + "," + dateOfBirth + "," + joinDate + "," + salary);
+        return test;
+    }
+
 
     public Date getDateOfBirth() {
         return dateOfBirth;

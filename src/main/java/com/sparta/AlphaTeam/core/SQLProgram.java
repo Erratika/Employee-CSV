@@ -10,7 +10,9 @@ public class SQLProgram {
         controller.collectFileToUse();
         controller.convertFileToEmployee();
         controller.filterRecords();
-        controller.displayCleanRecords();
+        //controller.displayCleanRecords();
+        //controller.displayAllDirtyRecords();
+        controller.getNumberOfThreads();
     }
 
 
