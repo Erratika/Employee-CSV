@@ -96,9 +96,10 @@
     db.username=<Your Username>
     db.password=<Your Password>
     ```
-    
-    populating ``db.username`` with your MySQL database username and ``db.password`` with the associated password for that
-    user.
+
+   populating ``db.username`` with your MySQL database username and ``db.password`` with the associated password for
+   that
+   user.
 
 4. Make sure MySQL 8 is running.
 5. Run the application with:
@@ -113,12 +114,21 @@ Once the application is running you will be presented with a selection of ``.csv
 ![]()
 
 ## Design
+
 ### Reader
+
 ### Parsing
-The ``EmployeeConverter.java`` class is responsible for parsing each entry in the ``.csv`` files
+
+The ``EmployeeConverter.java`` class is responsible for parsing each entry in the ``.csv`` files and creating an
+Employee entry for each line. It does this through the method called convertStringsToEmployees which takes a ``List<String>`` and
+outputs a ``List<Employee>``
+
 ### Data Filtering and Cleaning
+
 ### SQL and Database Schema
+
 ### Multithreading
+
 ### Lambdas
 
 ## Testing

@@ -2,19 +2,20 @@ package com.sparta.AlphaTeam.DataManagement;
 
 import java.io.File;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataManager {
-
-
     private File chosenFile;
-    private List <String> dataString;
-    private List <Employee> unsortedRecords;
-    private List <Employee> cleanRecords;
-    private List <Employee> allDirtyRecords;
-    private List <Employee> missingValueRecords;
-    private List <Employee> invalidDateRecords;
-    private List <Employee> duplicatedRecords;
+    private int threadCount;
+    private List <String> dataString=new ArrayList<>();
+    private List <Employee> unsortedRecords=new ArrayList<>();
+    private List <Employee> cleanRecords=new ArrayList<>();
+    private List <Employee> allDirtyRecords=new ArrayList<>();
+    private List <Employee> missingValueRecords=new ArrayList<>();
+    private List <Employee> invalidDateRecords=new ArrayList<>();
+    private List <Employee> duplicatedRecords=new ArrayList<>();
+    private Thread[] threads;
 
 
     public DataManager() {
@@ -63,6 +64,13 @@ public class DataManager {
     }
 
     //---------------------GETTERS AND SETTERS------------------
+    public int getThreadCount() {
+        return threadCount;
+    }
+
+    public void setThreadCount(int threadCount) {
+        this.threadCount = threadCount;
+    }
     public File getChosenFile() {
         return chosenFile;
     }

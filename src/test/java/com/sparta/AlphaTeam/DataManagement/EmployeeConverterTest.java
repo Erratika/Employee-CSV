@@ -73,7 +73,7 @@ class EmployeeConverterTest {
 	@Test
 	void convertStringsToEmployeesTestAllEmpty() {
 		List<String> testValidStrings = new ArrayList<>();
-		testValidStrings.add(",,,,,,,,,\n");
+		testValidStrings.add(",,,,,,,,,");
 		assertThrows(IndexOutOfBoundsException.class, () -> {
 			EmployeeConverter.convertStringsToEmployees(testValidStrings);
 		});
