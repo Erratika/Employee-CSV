@@ -113,11 +113,18 @@ Once the application is running you will be presented with a selection of ``.csv
 ![]()
 
 ## Design
-
-## Results
+### Reader
+### Parsing
+The ``EmployeeConverter.java`` class is responsible for parsing each entry in the ``.csv`` files
+### Data Filtering and Cleaning
 ### SQL and Database Schema
 ### Multithreading
 ### Lambdas
+
+## Testing
+
+## Results
+
 ## Git Workflow
 
 We made a **_dev_** branch based off of **_master_** at the start of the project and protected **_master_** for approved

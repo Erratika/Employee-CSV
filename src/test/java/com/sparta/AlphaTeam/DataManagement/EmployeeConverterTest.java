@@ -21,7 +21,7 @@ class EmployeeConverterTest {
 	@Test
 	void convertStringsToEmployeesTestValid() {
 		List<String> testValidStrings = new ArrayList<>();
-		testValidStrings.add("792050,Ms.,Marget,V,Bowden,F,marget.bowden@hotmail.com,10/23/1991,7/8/2015,147396\n");
+		testValidStrings.add("792050,Ms.,Marget,V,Bowden,F,marget.bowden@hotmail.com,10/23/1991,7/8/2015,147396");
 		assertDoesNotThrow(() -> {
 			List<Employee> actualEmployees = EmployeeConverter.convertStringsToEmployees(testValidStrings);
 			Employee actualEmployee = actualEmployees.get(0);
@@ -43,7 +43,7 @@ class EmployeeConverterTest {
 	@Test
 	void convertStringsToEmployeesTestEmptyDate() {
 		List<String> testValidStrings = new ArrayList<>();
-		testValidStrings.add("792050,Ms.,Marget,V,Bowden,F,marget.bowden@hotmail.com,,7/8/2015,147396\n");
+		testValidStrings.add("792050,Ms.,Marget,V,Bowden,F,marget.bowden@hotmail.com,,7/8/2015,147396");
 		assertThrows(ParseException.class, () -> {
 			EmployeeConverter.convertStringsToEmployees(testValidStrings);
 
@@ -53,10 +53,21 @@ class EmployeeConverterTest {
 	@Test
 	void convertStringsToEmployeesTestEmptyChar() {
 		List<String> testValidStrings = new ArrayList<>();
-		testValidStrings.add(",Ms.,Marget,V,Bowden,,marget.bowden@hotmail.com,23/10/1991,7/8/2015,147396\n");
+		testValidStrings.add(",Ms.,Marget,V,Bowden,,marget.bowden@hotmail.com,23/10/1991,7/8/2015,147396");
 		assertThrows(StringIndexOutOfBoundsException.class, () -> {
 			EmployeeConverter.convertStringsToEmployees(testValidStrings);
 		});
+	}
+	@Test
+	void convertStringsToEmployeesTestEmptyInt() {
+		List<String> testValidStrings = new ArrayList<>();
+		testValidStrings.add(",Ms.,Marget,V,Bowden,F,marget.bowden@hotmail.com,23/10/1991,7/8/2015,");
+		final Employee[] actualEmployee = new Employee[1];
+				assertDoesNotThrow(() -> {
+					actualEmployee[0] = EmployeeConverter.convertStringsToEmployees(testValidStrings).get(0);
+					assertEquals(-1, actualEmployee[0].getId());
+					assertEquals(-1, actualEmployee[0].getSalary());
+				});
 	}
 
 	@Test
