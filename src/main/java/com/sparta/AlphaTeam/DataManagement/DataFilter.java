@@ -28,35 +28,33 @@ public class DataFilter {
         int fName = employee.getfName().length();
         int lName = employee.getlName().length();
         String firstN = employee.getEmail().substring(0, fName);
-        String lastN = employee.getEmail().substring(fName+1, (fName+1+lName));
-        if(!employee.getDateOfBirth().before(employee.getJoinDate())){
+        String lastN = employee.getEmail().substring(fName+1, (fName+lName+1));
+        if(employee.getJoinDate().before(employee.getDateOfBirth())){
             return true;
         }else{
             if(employee.getDateOfBirth().before(temp)){
                 return true;
             }else{
-                if((!employee.getfName().toLowerCase().equals(firstN.toLowerCase())) || (!employee.getlName().toLowerCase().equals(lastN.toLowerCase()))){ //email doesnt match name
+                if((!employee.getfName().toLowerCase().equals(firstN)) || (!employee.getlName().toLowerCase().equals(lastN))){ //email doesnt match name
                     return true;
+                }else {
+                    return false; //valid dates
                 }
-                return false; //valid dates
             }
         }
     }
 
-    public boolean filterDuplictes(Employee employee, List<Employee> list){
-        if(list.contains(employee)){
-            return true;
-        }else if(list.contains(employee.getId()) || list.contains(employee.getEmail())){
-            return true;
-        }
-        /*if(list.contains(employee.getlName()) && list.contains(employee.getfName())){
-            return true;
-        }else{
-            if(list.contains(employee.getEmail()) || list.contains(employee)){
+    public boolean filterDuplictes(Employee employee,List<Employee> list){
+        for(Employee e: list){
+            if(employee.getfName().equals(e.getfName()) && employee.getlName().equals(e.getlName())){
+                return true; //exists
+            }else if(employee.getId() == e.getId()){
+                return true;
+            }else if(employee.getEmail().equals(e.getEmail())){
                 return true;
             }
-        }*/
+        }
         return false;
-
     }
+
 }
