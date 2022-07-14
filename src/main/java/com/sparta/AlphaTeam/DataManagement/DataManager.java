@@ -1,5 +1,10 @@
 package com.sparta.AlphaTeam.DataManagement;
 
+import com.sparta.AlphaTeam.DataManagement.Database.DAO;
+import com.sparta.AlphaTeam.DataManagement.Database.DatabaseInit;
+import com.sparta.AlphaTeam.DataManagement.Database.EmployeeDAO;
+import com.sparta.AlphaTeam.core.Timer;
+
 import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -15,15 +20,52 @@ public class DataManager {
     private List <Employee> missingValueRecords=new ArrayList<>();
     private List <Employee> invalidDateRecords=new ArrayList<>();
     private List <Employee> duplicatedRecords=new ArrayList<>();
+    private List<Employee> fetchedRecords= new ArrayList<>();
     private Thread[] threads;
-
+    private long timeTaken;
 
     public DataManager() {
     }
 
     public void setupDatabase(){
+        DatabaseInit.makeTable();
+    }
+    public void createThreads(){
+        CustomThreadFactory customThreadFactory=new CustomThreadFactory();
+      //  threads[] = customThreadFactory.customThreadFactory(threadCount,cleanRecords);
+    }
+    public void addToDatabase(){
+        setupDatabase();
+        Timer timer = new Timer();
+        timer.start();
+        for (Thread t : threads){
+            t.start();
+        }
+        for (Thread t:threads){
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        timeTaken=timer.stop();
+    }
+    public void getEmployeeFromDatabase(){
+        DAO dataAccess = new EmployeeDAO();
+        fetchedRecords=dataAccess.getAll();
+    }
+    // --------------------- testing adding to database
+    public void addAllToDatabase(){
+        DAO dataAccess = new EmployeeDAO();
+        DatabaseInit.makeTable();
+        for (Employee e : cleanRecords){
+            dataAccess.add(e);
+        }
 
     }
+
+
+
     public void sortUnsortedRecords(){
         DataFilter dataFilter= new DataFilter();
         boolean isDirty = false;
@@ -64,6 +106,13 @@ public class DataManager {
     }
 
     //---------------------GETTERS AND SETTERS------------------
+    public List<Employee> getFetchedRecords() {
+        return fetchedRecords;
+    }
+
+    public void setFetchedRecords(List<Employee> fetchedRecords) {
+        this.fetchedRecords = fetchedRecords;
+    }
     public int getThreadCount() {
         return threadCount;
     }
