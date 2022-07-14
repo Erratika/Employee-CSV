@@ -14,9 +14,13 @@ public class Controller {
         dataManager.setChosenFile(filePath);
     }
     public void getNumberOfThreads(){
-        // int threads = userManager.getInputInt();
         int threads = userManager.getUserThread();
+        dataManager.setThreadCount(threads);
     }
+    public void generateThreads(){
+        dataManager.
+    }
+
     public void convertFileToEmployee(){
         dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
     }
@@ -24,6 +28,8 @@ public class Controller {
     public void filterRecords(){
         dataManager.sortUnsortedRecords();
     }
+
+
 
     public void displayCleanRecords(){
         System.out.println("clean records___________");

@@ -11,7 +11,8 @@ public class SQLProgram {
         controller.convertFileToEmployee();
         controller.filterRecords();
         //controller.displayCleanRecords();
-        controller.displayAllDirtyRecords();
+        //controller.displayAllDirtyRecords();
+        controller.getNumberOfThreads();
     }
 
 

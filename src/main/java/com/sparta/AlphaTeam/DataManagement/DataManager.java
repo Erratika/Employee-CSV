@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataManager {
-
-
     private File chosenFile;
+    private int threadCount;
     private List <String> dataString=new ArrayList<>();
     private List <Employee> unsortedRecords=new ArrayList<>();
     private List <Employee> cleanRecords=new ArrayList<>();
@@ -16,6 +15,7 @@ public class DataManager {
     private List <Employee> missingValueRecords=new ArrayList<>();
     private List <Employee> invalidDateRecords=new ArrayList<>();
     private List <Employee> duplicatedRecords=new ArrayList<>();
+    private Thread[] threads;
 
 
     public DataManager() {
@@ -64,6 +64,13 @@ public class DataManager {
     }
 
     //---------------------GETTERS AND SETTERS------------------
+    public int getThreadCount() {
+        return threadCount;
+    }
+
+    public void setThreadCount(int threadCount) {
+        this.threadCount = threadCount;
+    }
     public File getChosenFile() {
         return chosenFile;
     }
