@@ -4,12 +4,13 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class DataFilter {
     static int i = 0;
     private static Date parseDate(String string) throws ParseException {
-        SimpleDateFormat parser = new SimpleDateFormat("MM/dd/yyyy");
-        return (Date) parser.parse(string);
+        SimpleDateFormat parser = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+        return parser.parse(string);
     }
 
     public boolean filterMissing(Employee employee){
@@ -30,7 +31,7 @@ public class DataFilter {
         int fName = employee.getfName().length();
         int lName = employee.getlName().length();
         String firstN = employee.getEmail().substring(0, fName);
-        String lastN = employee.getEmail().substring(fName+1, lName);
+        String lastN = employee.getEmail().substring(fName+2, (fName+2+lName));
         if(employee.getDateOfBirth().before(employee.getJoinDate())){
             return true;
         }else{
