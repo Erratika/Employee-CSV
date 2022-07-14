@@ -8,6 +8,9 @@ public class Controller {
     UserManager userManager=new UserManager();
     DataManager dataManager=new DataManager();
 
+    public void greeting(){
+        userManager.intro();
+    }
     public void collectFileToUse(){
         FileEnum temp =  userManager.getFileENumber();
         String filePath = temp.getFilePath();
@@ -18,7 +21,10 @@ public class Controller {
         dataManager.setThreadCount(threads);
     }
     public void generateThreads(){
-        dataManager.
+        dataManager.createThreads();
+    }
+    public void addToDatabase(){
+        dataManager.addAllToDatabase();
     }
 
     public void convertFileToEmployee(){

@@ -35,9 +35,6 @@ public class DatabaseInit {
         } catch (Exception e){
             e.printStackTrace();
         }
-
-
-        ConnectionFactory.closeConnection();
     }
 
 

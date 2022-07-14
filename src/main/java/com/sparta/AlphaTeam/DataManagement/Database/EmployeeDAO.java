@@ -27,9 +27,10 @@ public class EmployeeDAO implements DAO<Employee> {
     List<Employee> employeeList= new ArrayList<>();
 
     public List<Employee> getAll(){
-                try(Connection connection = ConnectionFactory.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
+                try(PreparedStatement stmt =connection.prepareStatement("SELECT * FROM employees ");
         ) {
-            PreparedStatement stmt =connection.prepareStatement("SELECT * FROM employees ");
+
             ResultSet rs =stmt.executeQuery();
             while(rs.next()){
                 employeeList.add(new Employee());
@@ -43,9 +44,8 @@ public class EmployeeDAO implements DAO<Employee> {
     }
     @Override
     public void add(Employee employee){
-        try(Connection connection = ConnectionFactory.getConnection();
-        ) {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO employees VALUES (?,?,?,?,?,?,?,?,?,?)");
+        Connection connection = ConnectionFactory.getConnection();
+        try(PreparedStatement statement = connection.prepareStatement("INSERT INTO employees VALUES (?,?,?,?,?,?,?,?,?,?)")){
             statement.setInt(1,employee.getId());
             statement.setString(2,employee.getPrefix());
             statement.setString(3,employee.getfName());
@@ -68,8 +68,8 @@ public class EmployeeDAO implements DAO<Employee> {
 
     @Override
     public Optional<Employee> get(int id){
-        try(Connection connection = ConnectionFactory.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM employees where id == (?)");
+        Connection connection = ConnectionFactory.getConnection();
+        try(PreparedStatement statement = connection.prepareStatement("SELECT * FROM employees where id == (?)")) {
             statement.setInt(1,id);
             ResultSet resultSet = statement.getResultSet();
             return Optional.of(new Employee(
