@@ -1,11 +1,12 @@
 package com.sparta.AlphaTeam.DataManagement;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class DataFilter {
+    static int i = 0;
     private static Date parseDate(String string) throws ParseException {
         SimpleDateFormat parser = new SimpleDateFormat("MM/dd/yyyy");
         return (Date) parser.parse(string);
@@ -23,6 +24,8 @@ public class DataFilter {
     }
 
     public boolean filterInvalidData(Employee employee) throws ParseException {
+        System.out.println("operation" + i);
+        i++;
         Date temp = parseDate("12/31/1903");
         int fName = employee.getfName().length();
         int lName = employee.getlName().length();
