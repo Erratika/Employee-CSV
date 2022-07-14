@@ -28,17 +28,18 @@ public class DataFilter {
         int fName = employee.getfName().length();
         int lName = employee.getlName().length();
         String firstN = employee.getEmail().substring(0, fName);
-        String lastN = employee.getEmail().substring(fName+2, (fName+2+lName));
-        if(employee.getDateOfBirth().before(employee.getJoinDate())){
+        String lastN = employee.getEmail().substring(fName+1, (fName+lName+1));
+        if(employee.getJoinDate().before(employee.getDateOfBirth())){
             return true;
         }else{
             if(employee.getDateOfBirth().before(temp)){
                 return true;
             }else{
-                if((!employee.getfName().equals(firstN)) || (!employee.getlName().equals(lastN))){ //email doesnt match name
+                if((!employee.getfName().toLowerCase().equals(firstN)) || (!employee.getlName().toLowerCase().equals(lastN))){ //email doesnt match name
                     return true;
+                }else {
+                    return false; //valid dates
                 }
-                return false; //valid dates
             }
         }
     }
