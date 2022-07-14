@@ -15,3 +15,9 @@ javac src/main/java/com/sparta/AlphaTeam/core/Main.java
 ```shell
 java Main
 ```
+
+
+## comments
+### values using different amounts of threads
+
+### performance difference from lambda vs no lambda
