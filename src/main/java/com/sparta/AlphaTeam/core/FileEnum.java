@@ -2,9 +2,9 @@ package com.sparta.AlphaTeam.core;
 
 public enum FileEnum {
     // Update new methods here
-    EMPLOYEERECORDS1 (1, "employee records 1", "src/main/resources/EmployeeRecords1.csv"),
-    EMPLOYEERECORDS2 (2 , "employee records 2", "src/main/resources/EmployeeRecords2.csv"),
-    EMPLOYEERECORDSLARGE ( 3, "employee records large", "src/main/resources/EmployeeRecordsLarge.csv");
+    EMPLOYEERECORDS1 (1, "EmployeeRecords1.csv", "src/main/resources/EmployeeRecords1.csv"),
+    EMPLOYEERECORDS2 (2 , "EmployeeRecords2.csv", "src/main/resources/EmployeeRecords2.csv"),
+    EMPLOYEERECORDSLARGE ( 3, "EmployeeRecordsLarge.csv", "src/main/resources/EmployeeRecordsLarge.csv");
 
     private final int enumKey;
     private final String fileName;

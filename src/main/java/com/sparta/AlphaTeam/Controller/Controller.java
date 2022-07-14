@@ -22,22 +22,27 @@ public class Controller {
     }
 
     public void filterRecords(){
-        dataManager.sortData();
+        dataManager.sortUnsortedRecords();
     }
 
     public void displayCleanRecords(){
+        System.out.println("clean records___________");
         userManager.displayRecords(dataManager.getCleanRecords());
     }
     public void displayAllDirtyRecords(){
+        System.out.println("dirty records___________");
         userManager.displayRecords(dataManager.getAllDirtyRecords());
     }
     public void displayInvalidDateRecords(){
+        System.out.println("invalid data___________");
         userManager.displayRecords(dataManager.getInvalidDateRecords());
     }
     public void displayDuplicateRecords(){
+        System.out.println("duplicate records___________");
         userManager.displayRecords(dataManager.getDuplicatedRecords());
     }
     public void displayMissingValueRecords(){
+        System.out.println("records with missing values___________");
         userManager.displayRecords(dataManager.getCleanRecords());
     }
 
