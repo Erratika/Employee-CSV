@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class DataFilter {
-    static int i = 0;
     private static Date parseDate(String string) throws ParseException {
         SimpleDateFormat parser = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
         return parser.parse(string);
@@ -25,20 +24,18 @@ public class DataFilter {
     }
 
     public boolean filterInvalidData(Employee employee) throws ParseException {
-        System.out.println("operation" + i);
-        i++;
         Date temp = parseDate("12/31/1903");
         int fName = employee.getfName().length();
         int lName = employee.getlName().length();
         String firstN = employee.getEmail().substring(0, fName);
-        String lastN = employee.getEmail().substring(fName+2, (fName+2+lName));
-        if(employee.getDateOfBirth().before(employee.getJoinDate())){
+        String lastN = employee.getEmail().substring(fName+1, (fName+1+lName));
+        if(!employee.getDateOfBirth().before(employee.getJoinDate())){
             return true;
         }else{
             if(employee.getDateOfBirth().before(temp)){
                 return true;
             }else{
-                if((!employee.getfName().equals(firstN)) || (!employee.getlName().equals(lastN))){ //email doesnt match name
+                if((!employee.getfName().toLowerCase().equals(firstN.toLowerCase())) || (!employee.getlName().toLowerCase().equals(lastN.toLowerCase()))){ //email doesnt match name
                     return true;
                 }
                 return false; //valid dates
