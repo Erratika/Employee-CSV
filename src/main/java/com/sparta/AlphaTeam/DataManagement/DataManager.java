@@ -62,11 +62,6 @@ public class DataManager {
         }
     }
 
-    public void sortData(){
-        //filter to populate all missing
-        //filter to
-    }
-
     //---------------------GETTERS AND SETTERS------------------
     public File getChosenFile() {
         return chosenFile;

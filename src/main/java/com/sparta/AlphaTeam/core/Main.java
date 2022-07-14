@@ -5,6 +5,5 @@ public class Main {
         SQLProgram sqlProgram = new SQLProgram();
         sqlProgram.start();
 
-        System.out.println("test message");
     }
 }

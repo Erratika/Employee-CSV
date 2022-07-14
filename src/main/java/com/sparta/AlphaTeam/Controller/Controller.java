@@ -22,7 +22,7 @@ public class Controller {
     }
 
     public void filterRecords(){
-        dataManager.sortData();
+        dataManager.sortUnsortedRecords();
     }
 
     public void displayCleanRecords(){
