@@ -44,20 +44,13 @@ public class DataFilter {
         }
     }
 
-    public boolean filterDuplictes(Employee employee, List<Employee> list){
-        if(list.contains(employee)){
-            return true;
-        }else if(list.contains(employee.getId()) || list.contains(employee.getEmail())){
-            return true;
-        }
-        /*if(list.contains(employee.getlName()) && list.contains(employee.getfName())){
-            return true;
-        }else{
-            if(list.contains(employee.getEmail()) || list.contains(employee)){
-                return true;
+    public boolean filterDuplictes(Employee employee,List<Employee> list){
+        for(Employee e: list){
+            if(employee.equals(e)){
+                return true; //exists
             }
-        }*/
+        }
         return false;
-
     }
+
 }
