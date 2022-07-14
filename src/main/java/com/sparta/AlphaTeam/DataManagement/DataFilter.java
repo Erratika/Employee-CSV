@@ -46,8 +46,12 @@ public class DataFilter {
 
     public boolean filterDuplictes(Employee employee,List<Employee> list){
         for(Employee e: list){
-            if(employee.equals(e)){
+            if(employee.getfName().equals(e.getfName()) && employee.getlName().equals(e.getlName())){
                 return true; //exists
+            }else if(employee.getId() == e.getId()){
+                return true;
+            }else if(employee.getEmail().equals(e.getEmail())){
+                return true;
             }
         }
         return false;

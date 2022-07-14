@@ -33,7 +33,7 @@ public class DataFilterTests {
             ,(parser.parse("11/03/1999")), (parser.parse("06/20/2022")), 21000);
     Employee clean4 =  new Employee(78291, "Miss", "Suzy", 'G', "Coke", 'F', "sira.coke@spartaglobal.com"
             ,(parser.parse("11/03/1999")), (parser.parse("06/20/2022")), 22000);
-    Employee clean5 =  new Employee(87782, "Mr", "Kira", 'G', "Coke", 'F', "kira.coke@spartaglobal.com"
+    Employee clean5 =  new Employee(87782, "Miss", "Bira", 'G', "Coke", 'F', "bira.coke@spartaglobal.com"
             ,(parser.parse("11/03/1999")), (parser.parse("06/20/2022")), 21000);
 
     Employee duplicate1= new Employee(290333, "Miss", "Kira", 'G', "Coke", 'F', "kira.coke@spartaglobal.com"
@@ -63,7 +63,7 @@ public class DataFilterTests {
         Assertions.assertTrue(dataFilter.filterDuplictes(duplicate2,list));
 
     }
-    /*@Test
+    @Test
     public void cleanTests() throws ParseException {
         List<Employee> list2 = new ArrayList<>();
         list2.add(clean);
@@ -73,5 +73,5 @@ public class DataFilterTests {
         Assertions.assertFalse(dataFilter.filterInvalidData(clean));
         Assertions.assertFalse(dataFilter.filterDuplictes(clean4, list2));
         Assertions.assertFalse(dataFilter.filterDuplictes(clean5, list2));
-    }*/
+    }
 }
