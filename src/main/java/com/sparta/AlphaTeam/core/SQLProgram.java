@@ -9,6 +9,7 @@ public class SQLProgram {
         controller.greeting();
         controller.collectFileToUse();
         controller.convertFileToEmployee();
+        controller.compareFileReading();
         controller.filterRecords();
         controller.userChoice();
         //controller.displayCleanRecords();

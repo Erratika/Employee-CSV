@@ -64,7 +64,7 @@ public class Controller {
         dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
     }
 
-    public long[] compareFileReading(){
+    public void compareFileReading(){
         Timer timer = new Timer();
         timer.start();
         dataManager.convertStringListToEmployee(userManager.streamReadFile(dataManager.getChosenFile().getPath()));
@@ -72,8 +72,8 @@ public class Controller {
         timer.start();
         dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
         long timeTwo = timer.stop();
-        long[] times = new long[]{timeOne, timeTwo};
-        return times;
+        System.out.println("Using the scanner class, reading the file took: "+ timeOne + " nano seconds");
+        System.out.println("Using lambdas and streams, reading the file took: " + timeTwo + " nano seconds");
     }
 
     public void filterRecords(){
