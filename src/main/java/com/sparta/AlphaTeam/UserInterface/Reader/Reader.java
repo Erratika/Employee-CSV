@@ -19,28 +19,18 @@ public class Reader {
                 dataString = scan.next();
                 employeeStringList.add(dataString);
             }
-            System.out.println(employeeStringList);
             return employeeStringList;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
-    /*public static List<String> streamReadFile (String fileName){
+    public static List<String> streamReadFile (String fileName){
         try {
-            List<String> employeeList = new ArrayList<>();
-            List<String[]> employeeStringListArray = Files.lines(Path.of(fileName)).skip(1).map(s -> s.split(",")).toList();
-            for(String[] e: employeeStringListArray){
-                StringBuilder sb = new StringBuilder();
-                for(int i = 0; i<e.length; i++){
-                    sb.append(e[i]);
-                    sb.append(",");
-                }
-                //System.out.println(sb);
-                employeeList.add(sb.toString());
-            }
-            return employeeList;
+//            List<String> employeeStringListArray = Files.lines(Path.of(fileName)).skip(1).map(s -> s.split(",")).toString();
+            List<String> employeeStringListArray = Files.lines(Path.of(fileName)).skip(1).toList();
+            return employeeStringListArray;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 }

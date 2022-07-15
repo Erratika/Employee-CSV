@@ -16,7 +16,7 @@ public class SQLProgram {
         controller.getNumberOfThreads();
         controller.generateThreads();
 
-        //controller.addToDatabase();
+        controller.addToDatabase();
 
         controller.getRecords();
         controller.displayFetchedRecords();
