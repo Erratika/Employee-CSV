@@ -134,7 +134,56 @@ outputs a ``List<Employee>``
 ## Testing
 
 ## Results
+### Functional programming (Lambdas) vs imperative 
+- Keep the original code and then run tests to see if efficiency has improved by adding functional code.
+In response to this task, a Timer was created such that the operation to read the file in could be timed.
+two varients of the code to read the file were created, one using lambda expressions and one with imerative methods
+upon execution, the program will compare the time taken for both methods and present them to the user.
+for the three files times to read the files were tracked, and correspond as follows
+**File 1**
+| lambda | imperative |
+| ------ | ---------- |
+| 83ms | 132ms |
+| 56ms | 61ms |
+| 49ms | 56ms |
+|58ms | 62ms |
 
+**File 2**
+| lambda | imperative |
+| ------ | ---------- |
+| 57ms | 133ms |
+| 62ms | 73ms |
+| 50ms | 58ms |
+| 56ms | 64ms |
+
+**File 3**
+| lambda | imperative |
+| ------ | ---------- |
+| 423ms | 441ms |
+| 346ms | 297ms |
+| 319ms | 377ms |
+| 295ms | 295ms |
+
+#### analysis
+ - it seems that when the program is initialised, the imperative programming is run first, but is always considerably slower.
+ - this may be due to the system still warming up at this point causing the read action to be slower, it is notable in later tests for file 1 and 2 that they are much closer together
+ - file 3 seems to show the most variation as it is the largest array, it is also the only occason when lambdas receive a slower result
+ - due to the results for file three, the conclusion that can be drawn is that lambdas are more efficient over small tasks but it is uncertain for longer ones
+ 
+ ### writing file 3 to the database via multithreading
+ file three is the largest of the files so using this file to test the speed of connection to the database should provide the best result of any variance
+ we used multithreading to split the workload between threads so each can push to the database and then used the timer to record how long the push took to complete
+ | thread count | 1 | 3 | 5 | 6 | 7 | 10 | 100 |
+ | ------------ | - | - | - | - | - | -- | --- |
+ | execution and buid time | 93.358 seconds  | 85.374 seconds | 83.88 seconds | 83.786 seconds  | 84.891 seconds | 85.952 seconds | 83.392 seconds |
+ | execution time | 93.357 seconds | 85.336 seconds | 83.831 seconds | 83.739 seconds | 84.839 seconds | 85.897 seconds | 83.329 seconds |
+ 
+ #### analysis
+ from the range of different values tested there are three conclusions that can be drawn
+ - using any number of threads more than one seems to be beneficial for the task
+ - the optimal range of threads for this example is around 5-6, however..
+ - using any number of threads more than one seems to yeild barely any variation in time, 100 is as effective as 5 or 6.
+ 
 ## Git Workflow
 
 We made a **_dev_** branch based off of **_master_** at the start of the project and protected **_master_** for approved
@@ -158,6 +207,8 @@ Once a feature was complete it was pushed back to **_dev_** and at the end of th
 ## Contributors
 
 - [Jeffrey Champion](https://github.com/Jchampion42)
+(Scrum master) primary contributions: project structure, enumbers, user interface, MVC and conenction of classes, resolving issues in other members work.
+
 - [Kira Coke](https://github.com/kira-coke)
 - [Marc Murray](https://github.com/Erratika)
 - [Michael Alo](https://github.com/Mikesjai)
