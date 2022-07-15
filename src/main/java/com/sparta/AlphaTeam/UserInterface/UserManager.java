@@ -3,12 +3,15 @@ package com.sparta.AlphaTeam.UserInterface;
 import com.sparta.AlphaTeam.DataManagement.Employee;
 import com.sparta.AlphaTeam.UserInterface.Reader.Reader;
 import com.sparta.AlphaTeam.core.FileEnum;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Scanner;
 
 
 
 public class UserManager {
+    private static final Logger LOG = LogManager.getLogger(UserManager.class);
 
     public void intro(){
         prompt("Welcome to the file management and storage application!\n\nFirst, you will need to select a file");

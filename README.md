@@ -92,7 +92,7 @@
 3. Add a ```databse.properties``` file into ``src/main/resources`` with the following:
 
     ```properties
-    db.url=jdbc:mysql://localhost:3306/employees
+    db.url=jdbc:mysql://localhost:3306/
     db.username=<Your Username>
     db.password=<Your Password>
     ```
@@ -101,7 +101,7 @@
    that
    user.
 
-4. Make sure MySQL 8 is running.
+4. Make sure MySQL 8 is running on localhost with port 3306.
 5. Run the application with:
 
     ```shell
@@ -234,5 +234,12 @@ Once a feature was complete it was pushed back to **_dev_** and at the end of th
 - [Jeffrey Champion](https://github.com/Jchampion42)
 - [Kira Coke](https://github.com/kira-coke)
 - [Marc Murray](https://github.com/Erratika)
+  - Git Helper 
+  - Worked on:
+    - EmployeeConverter and EmployeeConverterTest.
+    - DAO,EmployeeDAO and EmployeeDAOTest.
+    - Logging.
+    - ConnectionFactory and DatabaseInit with Jeffrey.
+    - README for all of above, requirements, running and Git Workflow.
 - [Michael Alo](https://github.com/Mikesjai)
 - [Michael Matson](https://github.com/M-Matson)

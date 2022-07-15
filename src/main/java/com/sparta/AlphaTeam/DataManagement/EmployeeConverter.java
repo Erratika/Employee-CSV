@@ -1,6 +1,9 @@
 package com.sparta.AlphaTeam.DataManagement;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,8 +12,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class EmployeeConverter {
+	private static final Logger LOG = LogManager.getLogger(EmployeeConverter.class);
+
 	public static List<Employee> convertStringsToEmployees(List<String> input) throws ParseException, IndexOutOfBoundsException {
 		ArrayList<Employee> employees = new ArrayList<>();
+		LOG.info("Beginning to parse CSV file entries.");
 		for (String line : input) {
 			String[] delimitedResult = line.split(",");
 			int id;
@@ -18,6 +24,7 @@ public class EmployeeConverter {
 			try {
 				id = Integer.parseInt(delimitedResult[0]);
 			} catch (NumberFormatException e) {
+				LOG.warn("Could not parse Integer value where it was expected. Setting it to -1.");
 				id = -1;
 			}
 			String prefix = delimitedResult[1];
@@ -27,6 +34,7 @@ public class EmployeeConverter {
 			try {
 				mInitial = delimitedResult[3].charAt(0);
 			} catch (StringIndexOutOfBoundsException e) {
+				LOG.warn("Could not parse Character value where it was expected. Setting it to null.");
 				mInitial = null;
 			}
 			String lName = delimitedResult[4];
@@ -34,6 +42,7 @@ public class EmployeeConverter {
 			try {
 				gender = delimitedResult[5].charAt(0);
 			} catch (StringIndexOutOfBoundsException e) {
+				LOG.warn("Could not parse Character value where it was expected. Setting it to null.");
 				gender = null;
 			}
 			String email = delimitedResult[6];
@@ -43,10 +52,12 @@ public class EmployeeConverter {
 			try {
 				salary = Integer.parseInt(delimitedResult[9]);
 			}catch (IndexOutOfBoundsException | NumberFormatException e) {
+				LOG.warn("Could not parse Integer value where it was expected. Setting it to -1.");
 				salary = -1;
 			}
 			employees.add(new Employee(id, prefix, fName, mInitial, lName, gender, email, dateOfBirth, joinDate, salary));
 		}
+		LOG.info("Done parsing CSV entries.");
 		return employees;
 	}
 

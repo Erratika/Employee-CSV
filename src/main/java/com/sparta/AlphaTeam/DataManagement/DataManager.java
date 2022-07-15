@@ -4,6 +4,8 @@ import com.sparta.AlphaTeam.DataManagement.Database.DAO;
 import com.sparta.AlphaTeam.DataManagement.Database.DatabaseInit;
 import com.sparta.AlphaTeam.DataManagement.Database.EmployeeDAO;
 import com.sparta.AlphaTeam.core.Timer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.text.ParseException;
@@ -12,66 +14,67 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 public class DataManager {
-    private File chosenFile;
-    private int threadCount;
-    private List<String> dataString = new ArrayList<>();
-    private List<Employee> unsortedRecords = new ArrayList<>();
-    private List<Employee> cleanRecords = new ArrayList<>();
-    private List<Employee> allDirtyRecords = new ArrayList<>();
-    private List<Employee> missingValueRecords = new ArrayList<>();
-    private List<Employee> invalidDateRecords = new ArrayList<>();
-    private List<Employee> duplicatedRecords = new ArrayList<>();
-    private List<Employee> fetchedRecords = new ArrayList<>();
-    private Thread[] threads;
-    private double timeTaken;
+	private Logger LOG = LogManager.getLogger(DataManager.class);
+	private File chosenFile;
+	private int threadCount;
+	private List<String> dataString = new ArrayList<>();
+	private List<Employee> unsortedRecords = new ArrayList<>();
+	private List<Employee> cleanRecords = new ArrayList<>();
+	private List<Employee> allDirtyRecords = new ArrayList<>();
+	private List<Employee> missingValueRecords = new ArrayList<>();
+	private List<Employee> invalidDateRecords = new ArrayList<>();
+	private List<Employee> duplicatedRecords = new ArrayList<>();
+	private List<Employee> fetchedRecords = new ArrayList<>();
+	private Thread[] threads;
+	private double timeTaken;
 
 
-    public DataManager() {
-    }
+	public DataManager() {
+		DatabaseInit.init();
+	}
 
-    public void setupDatabase() {
-        DatabaseInit.init();
-    }
 
-    public void createThreads() {
-        CustomThreadFactory customThreadFactory = new CustomThreadFactory();
-        threads = customThreadFactory.customThreadFactory(threadCount,cleanRecords);
-    }
+	public void createThreads() {
+		CustomThreadFactory customThreadFactory = new CustomThreadFactory();
+		threads = customThreadFactory.customThreadFactory(threadCount, cleanRecords);
+	}
 
-    public void getEmployeeFromDatabase() {
-        DAO dataAccess = new EmployeeDAO();
-        fetchedRecords = dataAccess.getAll();
-    }
+	public void getEmployeeFromDatabase() {
+		DAO dataAccess = new EmployeeDAO();
+		fetchedRecords = dataAccess.getAll();
+	}
 
-    // --------------------- testing adding to database
-    public void addAllToDatabase() {
-        if (threads.length<= 0 || threads ==null){
-            if (threadCount <= 0){
-                threadCount=1;
-            }
-            createThreads();
-        }
-        setupDatabase();
-        System.out.println("Using " + threadCount + " threads to push to database");
-        Timer timer = new Timer();
+	// --------------------- testing adding to database
+	public void addAllToDatabase() {
+		if (threadCount <= 0) {
+			threadCount = 1;
+		}
+		System.out.println("Using " + threadCount + " threads to push to database");
+		Timer timer = new Timer();
+		Timer timer1 = new Timer();
+		timer.start();
 
-        timer.start();
-        for (Thread t : threads) {
-            t.start();
-        }
-        boolean aliveCheck = true;
-        while(aliveCheck){
-            aliveCheck=false;
-            for(Thread t : threads){
-                if(t.isAlive()){
-                    aliveCheck=true;
-                }
-            }
-        }
-        timeTaken =timer.stop()/1E9;
-        timeTaken= Math.floor(timeTaken * 1000) / 1000;
-        System.out.println(" Time taken to push using " + threadCount + " threads: " + timeTaken + "Seconds");
-    }
+		createThreads();
+		timer1.start();
+		for (Thread t : threads) {
+			t.start();
+		}
+		boolean aliveCheck = true;
+		while (aliveCheck) {
+			aliveCheck = false;
+			for (Thread t : threads) {
+				if (t.isAlive()) {
+					aliveCheck = true;
+				}
+			}
+		}
+		timeTaken = timer.stop() / 1E9;
+		timeTaken = Math.floor(timeTaken * 1000) / 1000;
+		System.out.println(" Time taken to create and push using " + threadCount + " threads: " + timeTaken + "Seconds");
+		timeTaken = timer1.stop() / 1E9;
+		timeTaken = Math.floor(timeTaken * 1000) / 1000;
+		System.out.println("\n Time taken to execute push using " + threadCount + " threads: " + timeTaken + "Seconds");
+	}
 
       /*  }
         DAO dataAccess = new EmployeeDAO();
@@ -80,118 +83,126 @@ public class DataManager {
             dataAccess.add(e);
         }*/
 
-    public void sortUnsortedRecords(){
-        DataFilter dataFilter= new DataFilter();
-        boolean isDirty = false;
-        for (Employee e : unsortedRecords) {
-            isDirty = false;
+	public void sortUnsortedRecords() {
+		DataFilter dataFilter = new DataFilter();
+		boolean isDirty = false;
+		LOG.info("Filtering Employee entries.");
+		for (Employee e : unsortedRecords) {
+			isDirty = false;
 
-            try {if (dataFilter.filterInvalidData(e)){
-                invalidDateRecords.add(e);
-                isDirty=true;}
-            } catch (ParseException ex) {
-                ex.printStackTrace();}
+			try {
+				if (dataFilter.filterInvalidData(e)) {
+					invalidDateRecords.add(e);
+					isDirty = true;
+				}
+			} catch (ParseException ex) {
+				LOG.error("Encountered error while parsing an invalid record.");
+			}
+			if (dataFilter.filterMissing(e)) {
+				missingValueRecords.add(e);
+				isDirty = true;
+			}
 
-            if (dataFilter.filterMissing(e)){
-                missingValueRecords.add(e);
-                isDirty=true;
-            }
+			if (dataFilter.filterDuplictes(e, cleanRecords)) {
+				duplicatedRecords.add(e);
+				isDirty = true;
+			}
 
-            if (dataFilter.filterDuplictes(e,cleanRecords)){
-                duplicatedRecords.add(e);
-                isDirty=true;
-            }
+			if (isDirty) {
+				allDirtyRecords.add(e);
+			} else {
+				cleanRecords.add(e);
+			}
+		}
+        LOG.info("Done filtering.");
+}
 
-            if (isDirty){
-                allDirtyRecords.add(e);
-            }
-            else {
-                cleanRecords.add(e);
-            }
-        }
-    }
+	public void convertStringListToEmployee(List<String> inputList) {
+		try {
+			unsortedRecords = EmployeeConverter.convertStringsToEmployees(inputList);
+		} catch (ParseException e) {
+			LOG.error("Error while parsing entries from CSV file.");
+		}
+	}
 
-    public void convertStringListToEmployee(List<String> inputList){
-        try {
-            unsortedRecords=EmployeeConverter.convertStringsToEmployees(inputList);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
+	//---------------------GETTERS AND SETTERS------------------
+	public List<Employee> getFetchedRecords() {
+		return fetchedRecords;
+	}
 
-    //---------------------GETTERS AND SETTERS------------------
-    public List<Employee> getFetchedRecords() {
-        return fetchedRecords;
-    }
+	public void setFetchedRecords(List<Employee> fetchedRecords) {
+		this.fetchedRecords = fetchedRecords;
+	}
 
-    public void setFetchedRecords(List<Employee> fetchedRecords) {
-        this.fetchedRecords = fetchedRecords;
-    }
-    public int getThreadCount() {
-        return threadCount;
-    }
+	public int getThreadCount() {
+		return threadCount;
+	}
 
-    public void setThreadCount(int threadCount) {
-        this.threadCount = threadCount;
-    }
-    public File getChosenFile() {
-        return chosenFile;
-    }
+	public void setThreadCount(int threadCount) {
+		this.threadCount = threadCount;
+	}
 
-    public void setChosenFile(String filePath) {
-        this.chosenFile = new File(filePath);
-    }
+	public File getChosenFile() {
+		return chosenFile;
+	}
 
-    public List<String> getDataString() {
-        return dataString;
-    }
+	public void setChosenFile(String filePath) {
+		this.chosenFile = new File(filePath);
+	}
 
-    public void setDataString(List<String> dataString) {
-        this.dataString = dataString;
-    }
-    public List<Employee> getAllDirtyRecords() {
-        return allDirtyRecords;
-    }
+	public List<String> getDataString() {
+		return dataString;
+	}
 
-    public List<Employee> getCleanRecords() {
-        return cleanRecords;
-    }
-    public List<Employee> getMissingValueRecords(){
-        return missingValueRecords;
-    }
+	public void setDataString(List<String> dataString) {
+		this.dataString = dataString;
+	}
 
-    public List<Employee> getDuplicatedRecords() {
-        return duplicatedRecords;
-    }
+	public List<Employee> getAllDirtyRecords() {
+		return allDirtyRecords;
+	}
 
-    public List<Employee> getInvalidDateRecords() {
-        return invalidDateRecords;
-    }
-    public List<Employee> getUnsortedRecords(){
-        return unsortedRecords;
-    }
+	public List<Employee> getCleanRecords() {
+		return cleanRecords;
+	}
 
-    public void setUnsortedRecords(List<Employee> unsortedRecords) {
-        this.unsortedRecords = unsortedRecords;
-    }
+	public List<Employee> getMissingValueRecords() {
+		return missingValueRecords;
+	}
 
-    public void setAllDirtyRecords(List<Employee> allDirtyRecords) {
-        this.allDirtyRecords = allDirtyRecords;
-    }
+	public List<Employee> getDuplicatedRecords() {
+		return duplicatedRecords;
+	}
 
-    public void setCleanRecords(List<Employee> cleanRecords) {
-        this.cleanRecords = cleanRecords;
-    }
+	public List<Employee> getInvalidDateRecords() {
+		return invalidDateRecords;
+	}
 
-    public void setDuplicatedRecords(List<Employee> duplicatedRecords) {
-        this.duplicatedRecords = duplicatedRecords;
-    }
+	public List<Employee> getUnsortedRecords() {
+		return unsortedRecords;
+	}
 
-    public void setInvalidDateRecords(List<Employee> invalidDateRecords) {
-        this.invalidDateRecords = invalidDateRecords;
-    }
+	public void setUnsortedRecords(List<Employee> unsortedRecords) {
+		this.unsortedRecords = unsortedRecords;
+	}
 
-    public void setMissingValueRecords(List<Employee> missingValueRecords) {
-        this.missingValueRecords = missingValueRecords;
-    }
+	public void setAllDirtyRecords(List<Employee> allDirtyRecords) {
+		this.allDirtyRecords = allDirtyRecords;
+	}
+
+	public void setCleanRecords(List<Employee> cleanRecords) {
+		this.cleanRecords = cleanRecords;
+	}
+
+	public void setDuplicatedRecords(List<Employee> duplicatedRecords) {
+		this.duplicatedRecords = duplicatedRecords;
+	}
+
+	public void setInvalidDateRecords(List<Employee> invalidDateRecords) {
+		this.invalidDateRecords = invalidDateRecords;
+	}
+
+	public void setMissingValueRecords(List<Employee> missingValueRecords) {
+		this.missingValueRecords = missingValueRecords;
+	}
 }
