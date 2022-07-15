@@ -100,8 +100,15 @@ public class Controller {
         timer.start();
         dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
         long timeTwo = timer.stop();
-        System.out.println("Using the scanner class, reading the file took: "+ timeOne + " nano seconds");
+        System.out.println("\nUsing the scanner class, reading the file took: "+ timeOne + " nano seconds");
         System.out.println("Using lambdas and streams, reading the file took: " + timeTwo + " nano seconds");
+        long difference = 0;
+        if(timeOne<timeTwo){
+            difference = timeTwo-timeOne;
+        }else{
+            difference = timeOne-timeTwo;
+        }
+        System.out.println("There was a "+ difference + " difference between the 2 ways to read files\n");
     }
 
     public void filterRecords(){
