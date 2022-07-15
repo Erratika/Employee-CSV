@@ -23,17 +23,5 @@ public class AddTask implements Runnable{
         for (Employee e : employeeArray){
             dataAccess.add(e);
         }
-        /*Connection connection = ConnectionFactory.getConnection();
-        try {Statement statement = connection.createStatement();
-            for (Employee employee: employeeArray) {
-
-
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }*/
-
-
-
     }
 }
