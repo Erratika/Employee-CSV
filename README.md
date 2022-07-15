@@ -92,7 +92,7 @@
 3. Add a ```databse.properties``` file into ``src/main/resources`` with the following:
 
     ```properties
-    db.url=jdbc:mysql://localhost:3306/employees
+    db.url=jdbc:mysql://localhost:3306/
     db.username=<Your Username>
     db.password=<Your Password>
     ```
@@ -101,7 +101,7 @@
    that
    user.
 
-4. Make sure MySQL 8 is running.
+4. Make sure MySQL 8 is running on localhost with port 3306.
 5. Run the application with:
 
     ```shell
