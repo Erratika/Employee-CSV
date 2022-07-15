@@ -4,6 +4,8 @@ import com.sparta.AlphaTeam.DataManagement.Database.DAO;
 import com.sparta.AlphaTeam.DataManagement.Database.DatabaseInit;
 import com.sparta.AlphaTeam.DataManagement.Database.EmployeeDAO;
 import com.sparta.AlphaTeam.core.Timer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.text.ParseException;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataManager {
+    private Logger LOG = LogManager.getLogger(DataManager.class);
     private File chosenFile;
     private int threadCount;
     private List <String> dataString=new ArrayList<>();
@@ -45,6 +48,7 @@ public class DataManager {
             try {
                 t.join();
             } catch (InterruptedException e) {
+                LOG.warn("Thread was interrupted.");
                 throw new RuntimeException(e);
             }
         }
@@ -66,42 +70,46 @@ public class DataManager {
 
 
 
-    public void sortUnsortedRecords(){
-        DataFilter dataFilter= new DataFilter();
+    public void sortUnsortedRecords() {
+        DataFilter dataFilter = new DataFilter();
         boolean isDirty = false;
+        LOG.info("Filtering Employee entries.");
         for (Employee e : unsortedRecords) {
             isDirty = false;
 
-            try {if (dataFilter.filterInvalidData(e)){
-                invalidDateRecords.add(e);
-                isDirty=true;}
+            try {
+                if (dataFilter.filterInvalidData(e)) {
+                    invalidDateRecords.add(e);
+                    isDirty = true;
+                }
             } catch (ParseException ex) {
-                ex.printStackTrace();}
+                LOG.error("Encountered error while parsing an invalid record.");
 
-            if (dataFilter.filterMissing(e)){
-                missingValueRecords.add(e);
-                isDirty=true;
-            }
+                if (dataFilter.filterMissing(e)) {
+                    missingValueRecords.add(e);
+                    isDirty = true;
+                }
 
-            if (dataFilter.filterDuplictes(e,cleanRecords)){
-                duplicatedRecords.add(e);
-                isDirty=true;
-            }
+                if (dataFilter.filterDuplictes(e, cleanRecords)) {
+                    duplicatedRecords.add(e);
+                    isDirty = true;
+                }
 
-            if (isDirty){
-                allDirtyRecords.add(e);
-            }
-            else {
-                cleanRecords.add(e);
+                if (isDirty) {
+                    allDirtyRecords.add(e);
+                } else {
+                    cleanRecords.add(e);
+                }
             }
         }
+        LOG.info("Done filtering.");
     }
 
     public void convertStringListToEmployee(List<String> inputList){
         try {
             unsortedRecords=EmployeeConverter.convertStringsToEmployees(inputList);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOG.error("Error while parsing entries from CSV file.");
         }
     }
 

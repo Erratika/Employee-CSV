@@ -1,16 +1,17 @@
 package com.sparta.AlphaTeam.UserInterface;
 
-import com.sparta.AlphaTeam.Controller.Controller;
 import com.sparta.AlphaTeam.DataManagement.Employee;
 import com.sparta.AlphaTeam.UserInterface.Reader.Reader;
 import com.sparta.AlphaTeam.core.FileEnum;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.io.File;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class UserManager {
+    private static final Logger LOG = LogManager.getLogger(UserManager.class);
 
     public void intro(){
         promt("Welcome to the file management and storage application!\n\nFirst, you will need to select a file");
@@ -53,7 +54,7 @@ public class UserManager {
         try{
             temp = sc.nextLine();
         }catch(InputMismatchException e){
-            e.printStackTrace();
+            LOG.error("Encountered input mismatch.");
         }
         return temp;//users decision
     }

@@ -19,7 +19,7 @@ public class DatabaseInit {
     public static void makeTable(){
         Connection conn = ConnectionFactory.getConnection();
         try(Statement statement = conn.createStatement()){
-            LOG.info("Dropping any existing \"employeees\" tables.");
+            LOG.info("Dropping any existing \"employees\" tables.");
             statement.executeUpdate("DROP TABLE IF EXISTS employees");
             LOG.info("\"employees\" table dropped.");
             LOG.info("Creating a new \"employees\" table.");
@@ -41,9 +41,7 @@ public class DatabaseInit {
         statement.executeUpdate(sql);
             LOG.info("New \"employees\" table created.");
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e){
-            e.printStackTrace();
+            LOG.error("Encountered error while creating table.");
         }
     }
     public static void createDatabase(){
@@ -55,6 +53,7 @@ public class DatabaseInit {
             statement.executeUpdate("CREATE SCHEMA IF NOT EXISTS employees");
             statement.executeUpdate("USE employees");
         } catch (SQLException e) {
+            LOG.error("Encountered error while creating database.");
             throw new RuntimeException(e);
         }
     }

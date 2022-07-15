@@ -13,6 +13,7 @@ public class DataFilter {
     }
 
     public boolean filterMissing(Employee employee){
+
         int id = employee.getId();
         int salary = employee.getSalary();
         if ((id == -1) || (employee.getPrefix() == null) || (employee.getfName() == null) || (employee.getmName() == null) ||
