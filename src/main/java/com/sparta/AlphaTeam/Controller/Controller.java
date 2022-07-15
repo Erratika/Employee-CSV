@@ -8,36 +8,53 @@ public class Controller {
     UserManager userManager=new UserManager();
     DataManager dataManager=new DataManager();
 
+    public void greeting(){
+        userManager.intro();
+    }
     public void collectFileToUse(){
         FileEnum temp =  userManager.getFileENumber();
         String filePath = temp.getFilePath();
         dataManager.setChosenFile(filePath);
     }
     public void getNumberOfThreads(){
-        // int threads = userManager.getInputInt();
         int threads = userManager.getUserThread();
+        dataManager.setThreadCount(threads);
     }
+    public void generateThreads(){
+        dataManager.createThreads();
+    }
+    public void addToDatabase(){
+        dataManager.addAllToDatabase();
+    }
+
     public void convertFileToEmployee(){
         dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
     }
 
     public void filterRecords(){
-        dataManager.sortData();
+        dataManager.sortUnsortedRecords();
     }
 
+
+
     public void displayCleanRecords(){
+        System.out.println("clean records___________");
         userManager.displayRecords(dataManager.getCleanRecords());
     }
     public void displayAllDirtyRecords(){
+        System.out.println("dirty records___________");
         userManager.displayRecords(dataManager.getAllDirtyRecords());
     }
     public void displayInvalidDateRecords(){
+        System.out.println("invalid data___________");
         userManager.displayRecords(dataManager.getInvalidDateRecords());
     }
     public void displayDuplicateRecords(){
+        System.out.println("duplicate records___________");
         userManager.displayRecords(dataManager.getDuplicatedRecords());
     }
     public void displayMissingValueRecords(){
+        System.out.println("records with missing values___________");
         userManager.displayRecords(dataManager.getCleanRecords());
     }
 

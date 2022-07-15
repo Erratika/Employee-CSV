@@ -6,11 +6,19 @@ public class SQLProgram {
 
     public void start(){
         Controller controller = new Controller();
-
+        controller.greeting();
         controller.collectFileToUse();
         controller.convertFileToEmployee();
         controller.filterRecords();
-        controller.displayCleanRecords();
+        //controller.displayCleanRecords();
+        // TEST INPUT!!!
+        controller.getNumberOfThreads();
+        controller.generateThreads();
+
+        controller.addToDatabase();
+
+        //controller.displayAllDirtyRecords();
+
     }
 
 

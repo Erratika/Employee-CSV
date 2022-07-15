@@ -1,8 +1,9 @@
 package com.sparta.AlphaTeam.UserInterface.Reader;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,6 +21,15 @@ public class Reader {
             }
             return employeeStringList;
         } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static List<String> streamReadFile (String fileName){
+        try {
+//            List<String> employeeStringListArray = Files.lines(Path.of(fileName)).skip(1).map(s -> s.split(",")).toString();
+            List<String> employeeStringListArray = (List<String>) Files.lines(Path.of(fileName)).skip(1).map(s -> s.split(",")).toList();
+            return employeeStringListArray;
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
