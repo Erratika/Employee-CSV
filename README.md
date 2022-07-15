@@ -284,7 +284,12 @@ Once a feature was complete it was pushed back to **_dev_** and at the end of th
 (Scrum master) primary contributions: project structure, enumbers, user interface, MVC and conenction of classes, resolving issues in other members work.
 
 - [Kira Coke](https://github.com/kira-coke)
-- [Marc Murray](https://github.com/Erratika)
+  - Worked on:
+    - Controller with Jeffrey
+    - DataFilter and DataFilterTest
+    - DataManagerTest
+    - EmployeeTest
+- [Marc Murray](htps://github.com/Erratika)
   - Git Helper 
   - Worked on:
     - EmployeeConverter and EmployeeConverterTest.
