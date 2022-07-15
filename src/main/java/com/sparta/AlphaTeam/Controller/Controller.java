@@ -12,35 +12,63 @@ public class Controller {
         userManager.intro();
     }
     public boolean userChoice(){
-
+        boolean quitProgram=false;
         switch (userManager.userChoicePanel()){
             case 1: if (dataManager.getCleanRecords().size()==0 || dataManager.getCleanRecords()==null){
                 System.out.println("sorry, there are no clean records right now.");
-            }
+            } else  displayCleanRecords();
+            break;
 
-            case 2:
+            case 2: if (dataManager.getUnsortedRecords().size()==0 || dataManager.getCleanRecords()==null){
+                System.out.println("There are no unsorted records right now.");
+            } else  displayUnsortedRecords();
+            break;
 
-            case 3:
+            case 3: if (dataManager.getAllDirtyRecords().size()==0 || dataManager.getCleanRecords()==null){
+                System.out.println("There are no dirty records right now.");
+            } else  displayAllDirtyRecords();
+            break;
 
-            case 4:
+            case 4: if (dataManager.getInvalidDateRecords().size()==0 || dataManager.getCleanRecords()==null){
+                System.out.println("There are no records with invalid dates right now.");
+            } else  displayInvalidDateRecords();
+            break;
 
-            case 5:
+            case 5: if (dataManager.getMissingValueRecords().size()==0 || dataManager.getCleanRecords()==null){
+                System.out.println("There are no records with missing values right now.");
+            } else  displayInvalidDateRecords();
+            break;
 
-            case 6:
+            case 6: if (dataManager.getDuplicatedRecords().size()==0 || dataManager.getCleanRecords()==null){
+                System.out.println("There are no duplicate records right now.");
+            } else  displayDuplicateRecords();
+            break;
 
-            case 7:
+            case 7: if (dataManager.getCleanRecords().size()==0 || dataManager.getCleanRecords()==null){
+                System.out.println("sorry, there are no clean records to push right now.");
+            } else  addToDatabase();
+            break;
 
-            case 8:
+            case 8: getRecords();
+            break;
 
-            case 9:
+            case 9: if (dataManager.getFetchedRecords().size()==0 || dataManager.getCleanRecords()==null){
+                System.out.println("no fetched records available, ensure that records have first been retrieved from the database");
+            } else  displayFetchedRecords();
 
-            case 10:
+            case 10: collectFileToUse();
+                convertFileToEmployee();
+                filterRecords();
+                break;
 
-            case 11:
+            case 11: getNumberOfThreads();
+            generateThreads();
+            break;
 
-            case 12:
+            case 12: quitProgram=true;
+            break;
         }
-        return true;
+        return quitProgram;
     }
 
     public void collectFileToUse(){
@@ -70,7 +98,10 @@ public class Controller {
         dataManager.getEmployeeFromDatabase();
     }
 
-
+    public void displayUnsortedRecords(){
+        System.out.println("unsorted records____________");
+        userManager.displayRecords(dataManager.getUnsortedRecords());
+    }
     public void displayFetchedRecords(){
         System.out.println("records from database___________");
         userManager.displayRecords(dataManager.getFetchedRecords());

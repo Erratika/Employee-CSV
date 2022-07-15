@@ -25,7 +25,7 @@ public class Reader {
             throw new RuntimeException(e);
         }
     }
-    /*public static List<String> streamReadFile (String fileName){
+    public static List<String> streamReadFile (String fileName){
         try {
             List<String> employeeList = new ArrayList<>();
             List<String[]> employeeStringListArray = Files.lines(Path.of(fileName)).skip(1).map(s -> s.split(",")).toList();
@@ -42,5 +42,5 @@ public class Reader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 }
