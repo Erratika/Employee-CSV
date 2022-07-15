@@ -54,8 +54,9 @@ public class DataManager {
         Timer timer = new Timer();
         Timer timer1= new Timer();
         timer.start();
-        timer1.start();
+
         createThreads();
+        timer1.start();
         for (Thread t : threads) {
             t.start();
         }
