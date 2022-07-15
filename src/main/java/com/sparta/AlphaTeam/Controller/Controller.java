@@ -11,6 +11,38 @@ public class Controller {
     public void greeting(){
         userManager.intro();
     }
+    public boolean userChoice(){
+
+        switch (userManager.userChoicePanel()){
+            case 1: if (dataManager.getCleanRecords().size()==0 || dataManager.getCleanRecords()==null){
+                System.out.println("sorry, there are no clean records right now.");
+            }
+
+            case 2:
+
+            case 3:
+
+            case 4:
+
+            case 5:
+
+            case 6:
+
+            case 7:
+
+            case 8:
+
+            case 9:
+
+            case 10:
+
+            case 11:
+
+            case 12:
+        }
+        return true;
+    }
+
     public void collectFileToUse(){
         FileEnum temp =  userManager.getFileENumber();
         String filePath = temp.getFilePath();
@@ -34,9 +66,15 @@ public class Controller {
     public void filterRecords(){
         dataManager.sortUnsortedRecords();
     }
+    public void getRecords(){
+        dataManager.getEmployeeFromDatabase();
+    }
 
 
-
+    public void displayFetchedRecords(){
+        System.out.println("records from database___________");
+        userManager.displayRecords(dataManager.getFetchedRecords());
+    }
     public void displayCleanRecords(){
         System.out.println("clean records___________");
         userManager.displayRecords(dataManager.getCleanRecords());
