@@ -46,16 +46,16 @@ public class DataManager {
 
     // --------------------- testing adding to database
     public void addAllToDatabase() {
-        if (threads.length<= 0 || threads ==null){
             if (threadCount <= 0){
                 threadCount=1;
-            }
-            createThreads();
         }
         System.out.println("Using " + threadCount + " threads to push to database");
         Timer timer = new Timer();
-
+        Timer timer1= new Timer();
         timer.start();
+
+        createThreads();
+        timer1.start();
         for (Thread t : threads) {
             t.start();
         }
@@ -70,7 +70,10 @@ public class DataManager {
         }
         timeTaken =timer.stop()/1E9;
         timeTaken= Math.floor(timeTaken * 1000) / 1000;
-        System.out.println(" Time taken to push using " + threadCount + " threads: " + timeTaken + "Seconds");
+        System.out.println(" Time taken to create and push using " + threadCount + " threads: " + timeTaken + "Seconds");
+        timeTaken =timer1.stop()/1E9;
+        timeTaken= Math.floor(timeTaken * 1000) / 1000;
+        System.out.println("\n Time taken to execute push using " + threadCount + " threads: " + timeTaken + "Seconds");
     }
 
       /*  }
