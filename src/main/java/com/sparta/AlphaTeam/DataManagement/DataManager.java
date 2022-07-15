@@ -22,7 +22,7 @@ public class DataManager {
     private List <Employee> duplicatedRecords=new ArrayList<>();
     private List<Employee> fetchedRecords= new ArrayList<>();
     private Thread[] threads;
-    private long timeTaken;
+    private double timeTaken;
 
     public DataManager() {
     }

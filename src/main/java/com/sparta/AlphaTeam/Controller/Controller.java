@@ -101,19 +101,19 @@ public class Controller {
         Timer timer = new Timer();
         timer.start();
         dataManager.convertStringListToEmployee(userManager.streamReadFile(dataManager.getChosenFile().getPath()));
-        long timeOne = timer.stop();
+        double timeOne = timer.stop();
         timer.start();
         dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
-        long timeTwo = timer.stop();
-        System.out.println("\nUsing the scanner class, reading the file took: "+ TimeUnit.NANOSECONDS.toMillis(timeOne) + " nano seconds");
-        System.out.println("Using lambdas and streams, reading the file took: " + TimeUnit.NANOSECONDS.toMillis(timeTwo) + " nano seconds");
-        long difference;
+        double timeTwo = timer.stop();
+        System.out.println("\nUsing the scanner class, reading the file took: "+ timeOne/1000000 + " milliseconds");
+        System.out.println("Using lambdas and streams, reading the file took: " + timeTwo/1000000 + " milliseconds");
+        double difference = 0;
         if(timeOne<timeTwo){
             difference = timeTwo-timeOne;
         }else{
             difference = timeOne-timeTwo;
         }
-        System.out.println("There was a "+ TimeUnit.NANOSECONDS.toMillis(difference) + " milliseconds difference between the 2 ways to read files\n");
+        System.out.println("There was a "+ Math.floor(difference)/1000000 + " milliseconds difference between the 2 ways to read files\n");
     }
 
     public void filterRecords(){

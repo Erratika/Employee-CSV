@@ -36,14 +36,11 @@ public class CustomThreadFactory {
 		// - IS RUNNABLE r IN METHOD SIGNATURE NEEDED?
 		//
 
-//		threadArray[0] = new Thread(remainderArray);
-//		for (int i = 1; i < threadCount; i++) {
-//			for (int j = 0; j < innerArraysSize; j++ )
-//			threadArray[i] = new Thread(employeeNestedArray[i][j]);
-//
-//
-//
-//		}
+		threadArray[0] = new Thread(new AddTask(remainderArray));
+		for (int i = 1; i < threadCount; i++) {
+			for (int j = 0; j < innerArraysSize; j++ )
+				threadArray[i] = new Thread(new AddTask(employeeNestedArray[i]));
+		}
 	}
 }
 
