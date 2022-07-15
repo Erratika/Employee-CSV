@@ -49,7 +49,7 @@ public class EmployeeConverter {
 			int salary;
 			try {
 				salary = Integer.parseInt(delimitedResult[9]);
-			} catch (NumberFormatException e) {
+			}catch (IndexOutOfBoundsException | NumberFormatException e) {
 				salary = -1;
 			}
 			employees.add(new Employee(id, prefix, fName, mInitial, lName, gender, email, dateOfBirth, joinDate, salary));

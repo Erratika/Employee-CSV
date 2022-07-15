@@ -16,7 +16,6 @@ public class ConnectionFactory implements AutoCloseable {
             dbProps.load(new FileReader("src/main/resources/database.properties"));
         } catch (IOException e) {
             e.printStackTrace();
-
         }
 
 

@@ -8,6 +8,10 @@ import java.sql.Statement;
 import java.util.List;
 
 public class DatabaseInit {
+    public static void init(){
+        createDatabase();
+        makeTable();
+    }
 
     public static void makeTable(){
         Connection conn = ConnectionFactory.getConnection();
@@ -35,9 +39,16 @@ public class DatabaseInit {
         } catch (Exception e){
             e.printStackTrace();
         }
-
-
-        ConnectionFactory.closeConnection();
+    }
+    public static void createDatabase(){
+        Connection connection = ConnectionFactory.getConnection();
+        try(Statement statement = connection.createStatement()) {
+            statement.executeUpdate("DROP DATABASE IF EXISTS employees");
+            statement.executeUpdate("CREATE SCHEMA IF NOT EXISTS employees");
+            statement.executeUpdate("USE employees");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

@@ -1,5 +1,6 @@
 package com.sparta.AlphaTeam.UserInterface;
 
+import com.sparta.AlphaTeam.Controller.Controller;
 import com.sparta.AlphaTeam.DataManagement.Employee;
 import com.sparta.AlphaTeam.UserInterface.Reader.Reader;
 import com.sparta.AlphaTeam.core.FileEnum;
@@ -10,6 +11,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserManager {
+
+    public void intro(){
+        promt("Welcome to the file management and storage application!\n\nFirst, you will need to select a file");
+    }
+    public int userChoicePanel(){
+        promt("your operation was successful!");
+        return ChooseTools.actionChoice();
+
+    }
+
     public void displayRecords(List<Employee> listToRead){
         for (Employee e : listToRead){
             System.out.println(e);
@@ -18,13 +29,14 @@ public class UserManager {
     public List<String> readFile(String filePath){
         return Reader.readFile(filePath);
     }
+    public List<String> streamReadFile(String filePath){
+        return Reader.streamReadFile(filePath);
+    }
 
     public void promt(String string){
         System.out.println(string);
     }
-    public void promt(int x){
-        System.out.println(x);
-    }
+
     public int getInputInt() throws ArithmeticException{
         Scanner sc = new Scanner(System.in);
         return sc.nextInt();
@@ -33,6 +45,7 @@ public class UserManager {
         promt("How many threads would you like to use?");
         return ChooseTools.getUserArrayLength();
     }
+
 
     public String getInputString() throws InputMismatchException {
         Scanner sc = new Scanner(System.in);
@@ -45,24 +58,8 @@ public class UserManager {
         return temp;//users decision
     }
     public FileEnum getFileENumber(){
-        /*Scanner sc = new Scanner(System.in);
-        FileEnum file = null;
-        boolean userChoosing = true;
-        while(userChoosing){
-            int fileNumber = sc.nextInt();
-            for(FileEnum s: FileEnum.values()){
-                if(s.getEnumKey() == fileNumber){
-                    userChoosing = false;
-                    file = s;
-                }
-            }
-            if (userChoosing){
-                promt("Please enter a valid number corresponding to a File path");
-            }
-        }
-        return file;*/
         FileEnum fileEnum;
-        System.out.println("Please select a file to use by typing its number:");
+        promt("Please select a file to use by typing its number:");
         for (FileEnum s : FileEnum.values()){ // prints a list to the user of all enums in the list representing the different sort methods
             System.out.println(s.getEnumKey()+ ". " +s.getFileName());
         }
@@ -71,6 +68,21 @@ public class UserManager {
         return  fileEnum;
     }
     private static class ChooseTools{
+        public static int actionChoice(){
+            boolean userChoosing=true;
+            Scanner scanner = new Scanner(System.in);
+            int userValue=0;
+            while (userChoosing) {
+                System.out.println("you may choose a new operation by typing its' number: \n1. View clean records \n2. View unsorted records" +
+                                "\n3. view all dirty records\n4. view records with invalid date\n5. view records with missing fields\n" +
+                        "6. view duplicate records\n7. push clean records to the database\n8. retrieve records from database\n9. view records received from database\n10. choose a new file\n11. choose thread count\n12. quit");
+                userValue= StringConverter.stringToInt(scanner.next()); // uses converter to only return a positive int, and loop refuses a null array.
+                if (userValue>=1 && userValue<=12){
+                    userChoosing=false;
+                }
+            }
+            return  userValue;
+        }
         public static int getUserArrayLength(){
             boolean userChoosing=true;
             Scanner scanner = new Scanner(System.in);
