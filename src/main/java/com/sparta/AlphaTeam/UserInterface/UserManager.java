@@ -27,7 +27,9 @@ public class UserManager {
         }
     }
     public List<String> readFile(String filePath){
-        //return Reader.readFile(filePath);
+        return Reader.readFile(filePath);
+    }
+    public List<String> streamReadFile(String filePath){
         return Reader.streamReadFile(filePath);
     }
 

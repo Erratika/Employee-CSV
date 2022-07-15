@@ -3,6 +3,7 @@ package com.sparta.AlphaTeam.Controller;
 import com.sparta.AlphaTeam.DataManagement.DataManager;
 import com.sparta.AlphaTeam.UserInterface.UserManager;
 import com.sparta.AlphaTeam.core.FileEnum;
+import com.sparta.AlphaTeam.core.Timer;
 
 public class Controller {
     UserManager userManager=new UserManager();
@@ -89,6 +90,18 @@ public class Controller {
 
     public void convertFileToEmployee(){
         dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
+    }
+
+    public void compareFileReading(){
+        Timer timer = new Timer();
+        timer.start();
+        dataManager.convertStringListToEmployee(userManager.streamReadFile(dataManager.getChosenFile().getPath()));
+        long timeOne = timer.stop();
+        timer.start();
+        dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
+        long timeTwo = timer.stop();
+        System.out.println("Using the scanner class, reading the file took: "+ timeOne + " nano seconds");
+        System.out.println("Using lambdas and streams, reading the file took: " + timeTwo + " nano seconds");
     }
 
     public void filterRecords(){
