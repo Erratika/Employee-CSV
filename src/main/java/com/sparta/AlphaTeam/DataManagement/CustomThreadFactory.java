@@ -17,7 +17,7 @@ public class CustomThreadFactory implements ThreadFactory {
 		return new Thread(r);
 	}
 
-	public Thread[] customThreadFactory(int threadCount, List<Employee> employeeList, Runnable r) {
+	public void customThreadFactory(int threadCount, List<Employee> employeeList, Runnable r) {
 		Thread[] threadArray = new Thread[threadCount];
 
 		int remainder = employeeList.toArray().length % threadCount;
@@ -50,9 +50,9 @@ public class CustomThreadFactory implements ThreadFactory {
 
 		threadArray[0] = new Thread(new AddTask(remainderArray));
 		for (int i = 1; i < threadCount; i++) {
+			for (int j = 0; j < innerArraysSize; j++ )
 				threadArray[i] = new Thread(new AddTask(employeeNestedArray[i]));
 		}
-		return threadArray;
 	}
 }
 
