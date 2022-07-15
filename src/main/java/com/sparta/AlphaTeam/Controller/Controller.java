@@ -58,6 +58,7 @@ public class Controller {
             case 9: if (dataManager.getFetchedRecords().size()==0 || dataManager.getCleanRecords()==null){
                 System.out.println("no fetched records available, ensure that records have first been retrieved from the database");
             } else  displayFetchedRecords();
+            break;
 
             case 10: collectFileToUse();
                 convertFileToEmployee();
@@ -105,15 +106,15 @@ public class Controller {
         timer.start();
         dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
         double timeTwo = timer.stop()/1E6;
-        System.out.println("\nUsing the scanner class, reading the file took: "+ Math.floor(timeOne * 10000) / 10000 + " milliseconds");
-        System.out.println("Using lambdas and streams, reading the file took: " + Math.floor(timeTwo * 10000) / 10000 + " milliseconds");
+        System.out.println("\nUsing the scanner class, reading the file took: "+ Math.floor(timeOne * 1000) / 1000 + " milliseconds");
+        System.out.println("Using lambdas and streams, reading the file took: " + Math.floor(timeTwo * 1000) / 1000 + " milliseconds");
         double difference = 0;
         if(timeOne<timeTwo){
             difference = timeTwo-timeOne;
         }else{
             difference = timeOne-timeTwo;
         }
-        System.out.println("There was a "+ Math.floor(difference * 10000) / 10000 + " milliseconds difference between the 2 ways to read files\n");
+        System.out.println("There was a "+ Math.floor(difference * 1000) / 1000 + " milliseconds difference between the 2 ways to read files\n");
     }
 
     public void filterRecords(){
