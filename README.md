@@ -249,10 +249,10 @@ for the three files times to read the files were tracked, and correspond as foll
  file three is the largest of the files so using this file to test the speed of connection to the database should provide the best result of any variance
  we used multithreading to split the workload between threads so each can push to the database and then used the timer to record how long the push took to complete
  
-| thread count | 1 | 3 | 5 | 6 | 7 | 10 | 100               |
- | ------------ | ----- | ------ | ----- | ----- | ----- |-------------------| --- |
- | execution and buid time | 93.358 seconds  | 85.374 seconds | 83.88 seconds | 83.786 seconds  | 84.891 seconds | 85.952 seconds | 83.392 seconds    |
- | execution time | 93.357 seconds | 85.336 seconds | 83.831 seconds | 83.739 seconds | 84.839 seconds | 85.897 seconds | 83.329 seconds    |
+ | thread count | 1 | 3 | 5 | 6 | 7 | 10 | 100 |
+ | ------------ | ----- | ------ | ----- | ----- | ----- |------------------| --- |
+ | execution and buid time | 93.358 seconds  | 85.374 seconds | 83.88 seconds | 83.786 seconds  | 84.891 seconds | 85.952 seconds | 83.392 seconds   |
+ | execution time | 93.357 seconds | 85.336 seconds | 83.831 seconds | 83.739 seconds | 84.839 seconds | 85.897 seconds | 83.329 seconds   |
  
  #### analysis
  from the range of different values tested there are three conclusions that can be drawn
