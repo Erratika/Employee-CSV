@@ -234,5 +234,12 @@ Once a feature was complete it was pushed back to **_dev_** and at the end of th
 - [Jeffrey Champion](https://github.com/Jchampion42)
 - [Kira Coke](https://github.com/kira-coke)
 - [Marc Murray](https://github.com/Erratika)
+  - Git Helper 
+  - Worked on:
+    - EmployeeConverter and EmployeeConverterTest.
+    - DAO,EmployeeDAO and EmployeeDAOTest.
+    - Logging.
+    - ConnectionFactory and DatabaseInit with Jeffrey.
+    - README for all of above, requirements, running and Git Workflow.
 - [Michael Alo](https://github.com/Mikesjai)
 - [Michael Matson](https://github.com/M-Matson)
