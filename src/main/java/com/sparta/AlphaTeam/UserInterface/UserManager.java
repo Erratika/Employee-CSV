@@ -18,7 +18,6 @@ public class UserManager {
     public int userChoicePanel(){
         promt("your operation was successful!");
         return ChooseTools.actionChoice();
-
     }
 
     public void displayRecords(List<Employee> listToRead){
