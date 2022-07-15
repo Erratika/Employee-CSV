@@ -213,6 +213,7 @@ two varients of the code to read the file were created, one using lambda express
 upon execution, the program will compare the time taken for both methods and present them to the user.
 for the three files times to read the files were tracked, and correspond as follows
 **File 1**
+- 
 | lambda | imperative |
 | ------ | ---------- |
 | 83ms | 132ms |
@@ -221,6 +222,7 @@ for the three files times to read the files were tracked, and correspond as foll
 |58ms | 62ms |
 
 **File 2**
+
 | lambda | imperative |
 | ------ | ---------- |
 | 57ms | 133ms |
@@ -229,6 +231,7 @@ for the three files times to read the files were tracked, and correspond as foll
 | 56ms | 64ms |
 
 **File 3**
+
 | lambda | imperative |
 | ------ | ---------- |
 | 423ms | 441ms |
@@ -245,10 +248,11 @@ for the three files times to read the files were tracked, and correspond as foll
  ### writing file 3 to the database via multithreading
  file three is the largest of the files so using this file to test the speed of connection to the database should provide the best result of any variance
  we used multithreading to split the workload between threads so each can push to the database and then used the timer to record how long the push took to complete
- | thread count | 1 | 3 | 5 | 6 | 7 | 10 | 100 |
- | ------------ | - | - | - | - | - | -- | --- |
- | execution and buid time | 93.358 seconds  | 85.374 seconds | 83.88 seconds | 83.786 seconds  | 84.891 seconds | 85.952 seconds | 83.392 seconds |
- | execution time | 93.357 seconds | 85.336 seconds | 83.831 seconds | 83.739 seconds | 84.839 seconds | 85.897 seconds | 83.329 seconds |
+ 
+| thread count | 1 | 3 | 5 | 6 | 7 | 10 | 100               |
+ | ------------ | ----- | ------ | ----- | ----- | ----- |-------------------| --- |
+ | execution and buid time | 93.358 seconds  | 85.374 seconds | 83.88 seconds | 83.786 seconds  | 84.891 seconds | 85.952 seconds | 83.392 seconds    |
+ | execution time | 93.357 seconds | 85.336 seconds | 83.831 seconds | 83.739 seconds | 84.839 seconds | 85.897 seconds | 83.329 seconds    |
  
  #### analysis
  from the range of different values tested there are three conclusions that can be drawn
@@ -279,7 +283,16 @@ Once a feature was complete it was pushed back to **_dev_** and at the end of th
 ## Contributors
 
 - [Jeffrey Champion](https://github.com/Jchampion42)
-(Scrum master) primary contributions: project structure, enumbers, user interface, MVC and conenction of classes, resolving issues in other members work.
+- (Scrum master) 
+- primary contributions:
+    - project structure
+    - enumbers,
+    - user interface,
+    - MVC- main, sqlprogram, controller, usermanager, datamanager
+    - conenction of these classes to use other modules
+    - ConnectionFactory and DatabaseInit with Marc.
+    - CustomThreadFactory/AddTask with Michael Matson.
+    - test results for markdown
 
 - [Kira Coke](https://github.com/kira-coke)
 - [Marc Murray](https://github.com/Erratika)
@@ -289,6 +302,6 @@ Once a feature was complete it was pushed back to **_dev_** and at the end of th
     - DAO,EmployeeDAO and EmployeeDAOTest.
     - Logging.
     - ConnectionFactory and DatabaseInit with Jeffrey.
-    - README for all of above, requirements, running and Git Workflow.
+    - README for a majority of above, requirements, running and Git Workflow.
 - [Michael Alo](https://github.com/Mikesjai)
 - [Michael Matson](https://github.com/M-Matson)
