@@ -15,8 +15,9 @@ public class UserManager {
     public void intro(){
         promt("welcome to the file management and storage application! \n \n First, you will need to select a file");
     }
-    public void userChoicePanel(){
+    public int userChoicePanel(){
         promt("your operation was successful!");
+        return ChooseTools.actionChoice();
 
     }
 
@@ -70,10 +71,10 @@ public class UserManager {
             int userValue=0;
             while (userChoosing) {
                 System.out.println("you may choose a new operation by typing its' number: \n1. View clean records \n2. View unsorted records" +
-                                "\n3. view all dirty records\n4. view records with invalid date\n5.view records witH missing fields\n" +
-                        "6. view records with an incorrect date\n7. push clean records to the database\n8. retrieve records from database\n9. view records received from database\n10.choose a new file");
+                                "\n3. view all dirty records\n4. view records with invalid date\n5. view records witH missing fields\n" +
+                        "6. view records with an incorrect date\n7. push clean records to the database\n8. retrieve records from database\n9. view records received from database\n10. choose a new file\n11. choose thread count\n12. quit");
                 userValue= StringConverter.stringToInt(scanner.next()); // uses converter to only return a positive int, and loop refuses a null array.
-                if (userValue>=1 && userValue<=10){
+                if (userValue>=1 && userValue<=12){
                     userChoosing=false;
                 }
             }

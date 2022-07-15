@@ -10,12 +10,16 @@ public class SQLProgram {
         controller.collectFileToUse();
         controller.convertFileToEmployee();
         controller.filterRecords();
+        controller.userChoice();
         //controller.displayCleanRecords();
         // TEST INPUT!!!
         controller.getNumberOfThreads();
         controller.generateThreads();
 
-        controller.addToDatabase();
+        //controller.addToDatabase();
+
+        controller.getRecords();
+        controller.displayFetchedRecords();
 
         //controller.displayAllDirtyRecords();
 
