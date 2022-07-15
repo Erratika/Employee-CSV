@@ -9,13 +9,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class EmployeeConverter {
-	/**
-	 *
-	 * @param input
-	 * @return
-	 * @throws ParseException
-	 * @throws IndexOutOfBoundsException
-	 */
 	public static List<Employee> convertStringsToEmployees(List<String> input) throws ParseException, IndexOutOfBoundsException {
 		ArrayList<Employee> employees = new ArrayList<>();
 		for (String line : input) {

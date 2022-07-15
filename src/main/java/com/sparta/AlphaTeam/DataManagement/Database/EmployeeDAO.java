@@ -28,7 +28,7 @@ public class EmployeeDAO implements DAO<Employee> {
 
 	public List<Employee> getAll() {
 		Connection connection = ConnectionFactory.getConnection();
-		try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM employees ");
+		try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM employees ")
 		) {
 
 			ResultSet rs = stmt.executeQuery();

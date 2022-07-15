@@ -39,7 +39,7 @@ public class Controller {
 
             case 5: if (dataManager.getMissingValueRecords().size()==0 || dataManager.getCleanRecords()==null){
                 System.out.println("There are no records with missing values right now.");
-            } else  displayInvalidDateRecords();
+            } else  displayMissingValueRecords();
             break;
 
             case 6: if (dataManager.getDuplicatedRecords().size()==0 || dataManager.getCleanRecords()==null){
@@ -107,7 +107,7 @@ public class Controller {
         long timeTwo = timer.stop();
         System.out.println("\nUsing the scanner class, reading the file took: "+ TimeUnit.NANOSECONDS.toMillis(timeOne) + " nano seconds");
         System.out.println("Using lambdas and streams, reading the file took: " + TimeUnit.NANOSECONDS.toMillis(timeTwo) + " nano seconds");
-        long difference = 0;
+        long difference;
         if(timeOne<timeTwo){
             difference = timeTwo-timeOne;
         }else{

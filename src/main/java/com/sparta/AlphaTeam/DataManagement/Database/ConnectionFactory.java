@@ -24,20 +24,9 @@ public class ConnectionFactory implements AutoCloseable {
                 connection = DriverManager.getConnection(dbProps.getProperty("db.url"), dbProps.getProperty("db.username"), dbProps.getProperty("db.password"));
             } catch (SQLException e) {
                 e.printStackTrace();
-            } catch (Exception e){
-                e.printStackTrace();
             }
         }
         return connection;
-    }
-    public static void closeConnection(){
-        if (connection!=null){
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
     @Override
