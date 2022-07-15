@@ -30,11 +30,9 @@ public class DataManager {
 
 
     public DataManager() {
-    }
-
-    public void setupDatabase() {
         DatabaseInit.init();
     }
+
 
     public void createThreads() {
         CustomThreadFactory customThreadFactory = new CustomThreadFactory();
@@ -54,7 +52,6 @@ public class DataManager {
             }
             createThreads();
         }
-        setupDatabase();
         System.out.println("Using " + threadCount + " threads to push to database");
         Timer timer = new Timer();
 
