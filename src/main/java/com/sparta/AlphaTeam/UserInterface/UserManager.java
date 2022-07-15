@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class UserManager {
 
     public void intro(){
-        promt("welcome to the file management and storage application! \n \n First, you will need to select a file");
+        promt("Welcome to the file management and storage application!\n\nFirst, you will need to select a file");
     }
     public void userChoicePanel(){
         promt("your operation was successful!");
