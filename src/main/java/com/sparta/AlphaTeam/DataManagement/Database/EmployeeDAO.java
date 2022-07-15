@@ -70,7 +70,6 @@ public class EmployeeDAO implements DAO<Employee> {
 			statement.setInt(10, employee.getSalary());
 			statement.executeUpdate();
 		} catch (SQLIntegrityConstraintViolationException e) {
-			//TODO handle duplicate entry and document.
 			e.printStackTrace();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

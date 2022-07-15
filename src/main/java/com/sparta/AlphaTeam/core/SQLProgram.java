@@ -9,15 +9,12 @@ public class SQLProgram {
         controller.greeting();
         controller.collectFileToUse();
         controller.convertFileToEmployee();
-        controller.filterRecords();
-
+        controller.compareFileReading();
         boolean quitProgram=false;
         while(!quitProgram){
-            quitProgram=controller.userChoice();
+                quitProgram=controller.userChoice();
         }
 
     }
-
-
 
 }
