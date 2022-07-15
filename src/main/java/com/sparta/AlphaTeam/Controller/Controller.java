@@ -68,7 +68,10 @@ public class Controller {
             generateThreads();
             break;
 
-            case 12: quitProgram=true;
+            case 12: compareFileReading();
+            break;
+
+            case 13: quitProgram=true;
             break;
         }
         return quitProgram;
@@ -102,8 +105,8 @@ public class Controller {
         timer.start();
         dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
         long timeTwo = timer.stop();
-        System.out.println("\nUsing the scanner class, reading the file took: "+ timeOne + " nano seconds");
-        System.out.println("Using lambdas and streams, reading the file took: " + timeTwo + " nano seconds");
+        System.out.println("\nUsing the scanner class, reading the file took: "+ TimeUnit.NANOSECONDS.toMillis(timeOne) + " nano seconds");
+        System.out.println("Using lambdas and streams, reading the file took: " + TimeUnit.NANOSECONDS.toMillis(timeTwo) + " nano seconds");
         long difference = 0;
         if(timeOne<timeTwo){
             difference = timeTwo-timeOne;

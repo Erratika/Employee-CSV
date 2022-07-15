@@ -26,9 +26,17 @@ public class Reader {
     }
     public static List<String> streamReadFile (String fileName){
         try {
-//            List<String> employeeStringListArray = Files.lines(Path.of(fileName)).skip(1).map(s -> s.split(",")).toString();
-            List<String> employeeStringListArray = Files.lines(Path.of(fileName)).skip(1).toList();
-            return employeeStringListArray;
+            List<String> employeeList = new ArrayList<>();
+            List<String[]> employeeStringListArray = Files.lines(Path.of(fileName)).skip(1).map(s -> s.split(",")).toList();
+            for(String[] e: employeeStringListArray){
+                StringBuilder sb = new StringBuilder();
+                for(int i = 0; i<e.length; i++){
+                    sb.append(e[i]);
+                    sb.append(",");
+                }
+                employeeList.add(sb.toString());
+            }
+            return employeeList;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
