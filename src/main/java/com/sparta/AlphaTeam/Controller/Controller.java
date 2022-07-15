@@ -68,7 +68,10 @@ public class Controller {
             generateThreads();
             break;
 
-            case 12: quitProgram=true;
+            case 12: compareFileReading();
+            break;
+
+            case 13: quitProgram=true;
             break;
         }
         return quitProgram;

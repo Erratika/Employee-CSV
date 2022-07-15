@@ -19,7 +19,6 @@ public class Reader {
                 dataString = scan.next();
                 employeeStringList.add(dataString);
             }
-            System.out.println(employeeStringList);
             return employeeStringList;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -35,7 +34,6 @@ public class Reader {
                     sb.append(e[i]);
                     sb.append(",");
                 }
-                //System.out.println(sb);
                 employeeList.add(sb.toString());
             }
             return employeeList;
