@@ -113,7 +113,7 @@ public class Controller {
         }else{
             difference = timeOne-timeTwo;
         }
-        System.out.println("There was a "+ Math.floor(difference)/100000 + " milliseconds difference between the 2 ways to read files\n");
+        System.out.println("There was a "+ Math.floor(difference)/1000000 + " milliseconds difference between the 2 ways to read files\n");
     }
 
     public void filterRecords(){
