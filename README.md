@@ -92,7 +92,7 @@
 3. Add a ```databse.properties``` file into ``src/main/resources`` with the following:
 
     ```properties
-    db.url=jdbc:mysql://localhost:3306/employees
+    db.url=jdbc:mysql://localhost:3306/
     db.username=<Your Username>
     db.password=<Your Password>
     ```
@@ -101,7 +101,7 @@
    that
    user.
 
-4. Make sure MySQL 8 is running.
+4. Make sure MySQL 8 is running on localhost with port 3306.
 5. Run the application with:
 
     ```shell
@@ -111,7 +111,7 @@
 ### User Guide
 
 Once the application is running you will be presented with a selection of ``.csv`` files to choose from:
-![]()
+![](imgs/WelcomePrompt.PNG)
 
 ## Design
 
@@ -120,12 +120,77 @@ Once the application is running you will be presented with a selection of ``.csv
 ### Parsing
 
 The ``EmployeeConverter.java`` class is responsible for parsing each entry in the ``.csv`` files and creating an
-Employee entry for each line. It does this through the method called convertStringsToEmployees which takes a ``List<String>`` and
+Employee entry for each line. It does this through the method called convertStringsToEmployees which takes
+a ``List<String>`` and
 outputs a ``List<Employee>``
 
 ### Data Filtering and Cleaning
 
 ### SQL and Database Schema
+
+- The ``ConnectionFactory.java`` employs the [Singleton](https://refactoring.guru/design-patterns/singleton) pattern and
+  froms a connection to the MySQL database with the details provided into the ``src/main/resources/database.properties``
+  file.
+- The ``DatabaseInit.java`` is responsible for initialising the database and creating the table for which employee
+  entries
+  are entered into. The table is created with the following schema:
+
+    ```sql
+        CREATE TABLE `employees` " +
+        "
+    (
+        `id`
+        int
+        NOT
+        NULL,
+        " +
+            "
+        `prefix`
+        varchar
+        (
+        10
+        ) DEFAULT NULL," +
+        " `first_name` varchar
+        (
+            45
+        ) DEFAULT NULL," +
+        " `middle_initial` char
+        (
+            1
+        ) DEFAULT NULL," +
+        " `last_name` varchar
+        (
+            45
+        ) DEFAULT NULL," +
+        " `gender` char
+        (
+            1
+        ) DEFAULT NULL," +
+        " `email` varchar
+        (
+            45
+        ) DEFAULT NULL," +
+        " `date_of_birth` date DEFAULT NULL," +
+        " `date_of_joining` date DEFAULT NULL," +
+        " `salary` int DEFAULT NULL," +
+        " PRIMARY KEY
+        (
+            `id`
+        )," +
+        " UNIQUE KEY `email_UNIQUE`
+        (
+            `email`
+        ))" +
+        " ENGINE =InnoDB DEFAULT CHARSET =utf8mb4 " +
+        " COLLATE =utf8mb4_0900_ai_ci
+    ```
+  for the table we treat the ``id`` ass the primary key, meaning that each `id` has to be unique. We also reasonably
+  assumed that ``email`` entry on the table should also be unique.
+- The ``EmployeeDAO.java`` is a [DAO](https://en.wikipedia.org/wiki/Data_access_object)(Data Access Object) which purely
+  handles queries made to the database for the ``Employee.java`` object. It contains 3 functions for add (taking
+  an ``Employee.java`` object as a parameter), getAll(returning a list of ``Employee.java`` objects from the database)
+  and get(which takes the ``Employee.java`` ``id`` as a parameter and returns a single ``Employee.java`` object)
+  .
 
 ### Multithreading
 
@@ -133,7 +198,16 @@ outputs a ``List<Employee>``
 
 ## Testing
 
+### Reader
+
+### EmployeeConverter
+For testing the ``EmployeeConverter.java`` 
+
+### EmployeeDAO
+
 ## Results
+
+## Improvements
 
 ## Git Workflow
 
@@ -160,5 +234,12 @@ Once a feature was complete it was pushed back to **_dev_** and at the end of th
 - [Jeffrey Champion](https://github.com/Jchampion42)
 - [Kira Coke](https://github.com/kira-coke)
 - [Marc Murray](https://github.com/Erratika)
+  - Git Helper 
+  - Worked on:
+    - EmployeeConverter and EmployeeConverterTest.
+    - DAO,EmployeeDAO and EmployeeDAOTest.
+    - Logging.
+    - ConnectionFactory and DatabaseInit with Jeffrey.
+    - README for all of above, requirements, running and Git Workflow.
 - [Michael Alo](https://github.com/Mikesjai)
 - [Michael Matson](https://github.com/M-Matson)

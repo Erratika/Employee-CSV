@@ -9,18 +9,13 @@ public class SQLProgram {
         controller.greeting();
         controller.collectFileToUse();
         controller.convertFileToEmployee();
+        controller.compareFileReading();
         controller.filterRecords();
-        //controller.displayCleanRecords();
-        // TEST INPUT!!!
-        controller.getNumberOfThreads();
-        controller.generateThreads();
-
-        controller.addToDatabase();
-
-        //controller.displayAllDirtyRecords();
+        boolean quitProgram=false;
+        while(!quitProgram){
+                quitProgram=controller.userChoice();
+        }
 
     }
-
-
 
 }
