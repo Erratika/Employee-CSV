@@ -1,23 +1,11 @@
 package com.sparta.AlphaTeam.DataManagement;
 
 import java.util.List;
-import java.util.concurrent.ThreadFactory;
 
-public class CustomThreadFactory implements ThreadFactory {
-//    int threadCount;
-//
-//    public int getThreadCount() {
-//        return threadCount;
-//    }
+public class CustomThreadFactory {
 
-	@Override
-	public Thread newThread(Runnable r) {
 
-//        threadCount++;
-		return new Thread(r);
-	}
-
-	public void customThreadFactory(int threadCount, List<Employee> employeeList, Runnable r) {
+	public void customThreadFactory(int threadCount, List<Employee> employeeList) {
 		Thread[] threadArray = new Thread[threadCount];
 
 		int remainder = employeeList.toArray().length % threadCount;

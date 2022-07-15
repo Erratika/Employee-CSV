@@ -1,11 +1,9 @@
 package com.sparta.AlphaTeam.DataManagement.Database;
 
-import com.sparta.AlphaTeam.DataManagement.Employee;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
+
 
 public class DatabaseInit {
     public static void init(){
