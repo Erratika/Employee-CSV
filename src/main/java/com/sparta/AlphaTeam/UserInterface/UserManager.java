@@ -10,13 +10,21 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+
+
 public class UserManager {
 
     public void intro(){
         promt("Welcome to the file management and storage application!\n\nFirst, you will need to select a file");
     }
     public int userChoicePanel(){
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         promt("your operation was successful!");
+
         return ChooseTools.actionChoice();
     }
 
