@@ -13,6 +13,7 @@ import java.util.Locale;
 
 public class EmployeeConverter {
 	private static final Logger LOG = LogManager.getLogger(EmployeeConverter.class);
+
 	public static List<Employee> convertStringsToEmployees(List<String> input) throws ParseException, IndexOutOfBoundsException {
 		ArrayList<Employee> employees = new ArrayList<>();
 		LOG.info("Beginning to parse CSV file entries.");

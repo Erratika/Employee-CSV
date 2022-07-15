@@ -1,13 +1,12 @@
 package com.sparta.AlphaTeam.DataManagement.Database;
 
-import com.sparta.AlphaTeam.DataManagement.Employee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
+
 
 public class DatabaseInit {
     private static final Logger LOG = LogManager.getLogger(DatabaseInit.class);

@@ -9,14 +9,11 @@ public class SQLProgram {
         controller.greeting();
         controller.collectFileToUse();
         controller.convertFileToEmployee();
+        controller.compareFileReading();
         controller.filterRecords();
-        controller.addToDatabase();
-        controller.getRecords();
-        controller.displayFetchedRecords();
-        //controller.displayAllDirtyRecords();
         boolean quitProgram=false;
         while(!quitProgram){
-            quitProgram=controller.userChoice();
+                quitProgram=controller.userChoice();
         }
 
     }

@@ -5,26 +5,32 @@ import com.sparta.AlphaTeam.UserInterface.Reader.Reader;
 import com.sparta.AlphaTeam.core.FileEnum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+
+
 
 public class UserManager {
     private static final Logger LOG = LogManager.getLogger(UserManager.class);
 
     public void intro(){
-        promt("Welcome to the file management and storage application!\n\nFirst, you will need to select a file");
+        prompt("Welcome to the file management and storage application!\n\nFirst, you will need to select a file");
     }
     public int userChoicePanel(){
-        promt("your operation was successful!");
-        return ChooseTools.actionChoice();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        prompt("your operation was successful!");
 
+        return ChooseTools.actionChoice();
     }
 
     public void displayRecords(List<Employee> listToRead){
         for (Employee e : listToRead){
-            System.out.println(e);
+            String test = String.format("%-7s%-6s%-14s%-5s%-15s%-3s%-35s%-35s%-35s %-10s", e.getId(), e.getPrefix(), e.getfName(), e.getmName(), e.getlName(),e.getGender(),e.getEmail(),e.getDateOfBirth(),e.getJoinDate(),e.getSalary());
+            System.out.println(test);
         }
     }
     public List<String> readFile(String filePath){
@@ -34,33 +40,17 @@ public class UserManager {
         return Reader.streamReadFile(filePath);
     }
 
-    public void promt(String string){
+    public void prompt(String string){
         System.out.println(string);
     }
-
-    public int getInputInt() throws ArithmeticException{
-        Scanner sc = new Scanner(System.in);
-        return sc.nextInt();
-    }
     public int getUserThread(){
-        promt("How many threads would you like to use?");
+        prompt("How many threads would you like to use?");
         return ChooseTools.getUserArrayLength();
     }
 
-
-    public String getInputString() throws InputMismatchException {
-        Scanner sc = new Scanner(System.in);
-        String temp = null;
-        try{
-            temp = sc.nextLine();
-        }catch(InputMismatchException e){
-            LOG.error("Encountered input mismatch.");
-        }
-        return temp;//users decision
-    }
     public FileEnum getFileENumber(){
         FileEnum fileEnum;
-        promt("Please select a file to use by typing its number:");
+        prompt("Please select a file to use by typing its number:");
         for (FileEnum s : FileEnum.values()){ // prints a list to the user of all enums in the list representing the different sort methods
             System.out.println(s.getEnumKey()+ ". " +s.getFileName());
         }
@@ -74,10 +64,23 @@ public class UserManager {
             Scanner scanner = new Scanner(System.in);
             int userValue=0;
             while (userChoosing) {
-                System.out.println("You may choose a new operation by typing its' number: \n1. View clean records \n2. View unsorted records" +
-                                "\n3. View all dirty records\n4. View records with invalid date\n5. View records with missing fields\n" +
-                        "6. View duplicate records\n7. Push clean records to the database\n8. Retrieve records from database\n9. View records received from database" +
-                        "\n10. Choose a new file\n11. Choose thread count\n12. Compare the efficieny of lambdas and streams to a scanner\n13. Quit");
+                System.out.println("You may choose a new operation by typing its' number: \n" +
+                        "RECORDS______________\n"+
+                        "1. View clean records \n" +
+                        "2. View unsorted records\n" +
+                        "3. View all dirty records\n" +
+                        "4. View records with invalid date\n" +
+                        "5. View records with missing fields\n" +
+                        "6. View duplicate records\n" +
+                        "DATABASE___________________\n" +
+                        "7. Push clean records to the database\n" +
+                        "8. Retrieve records from database\n" +
+                        "9. View records received from database\n" +
+                        "SELECTION / UTILITY_______________\n" +
+                        "10. Choose a new file\n" +
+                        "11. Choose thread count\n" +
+                        "12. Compare the efficiency of lambdas and streams to a scanner\n" +
+                        "13. Quit");
                 userValue= StringConverter.stringToInt(scanner.next()); // uses converter to only return a positive int, and loop refuses a null array.
                 if (userValue>=1 && userValue<=13){
                     userChoosing=false;

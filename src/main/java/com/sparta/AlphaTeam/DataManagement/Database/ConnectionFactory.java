@@ -32,6 +32,7 @@ public class ConnectionFactory implements AutoCloseable {
                 LOG.info("Database Connection established.");
             } catch (SQLException e) {
                 LOG.error("Encountered an error when connecting to database.");
+
             }
         }
         return connection;

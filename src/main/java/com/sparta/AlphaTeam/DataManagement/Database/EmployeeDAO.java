@@ -30,9 +30,9 @@ public class EmployeeDAO implements DAO<Employee> {
 
 	public List<Employee> getAll() {
 		Connection connection = ConnectionFactory.getConnection();
-
 		LOG.info("Getting all employee records from database.");
 		try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM employees ")) {
+
 
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {

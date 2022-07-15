@@ -11,64 +11,77 @@ import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 public class DataManager {
     private Logger LOG = LogManager.getLogger(DataManager.class);
     private File chosenFile;
     private int threadCount;
-    private List <String> dataString=new ArrayList<>();
-    private List <Employee> unsortedRecords=new ArrayList<>();
-    private List <Employee> cleanRecords=new ArrayList<>();
-    private List <Employee> allDirtyRecords=new ArrayList<>();
-    private List <Employee> missingValueRecords=new ArrayList<>();
-    private List <Employee> invalidDateRecords=new ArrayList<>();
-    private List <Employee> duplicatedRecords=new ArrayList<>();
-    private List<Employee> fetchedRecords= new ArrayList<>();
+    private List<String> dataString = new ArrayList<>();
+    private List<Employee> unsortedRecords = new ArrayList<>();
+    private List<Employee> cleanRecords = new ArrayList<>();
+    private List<Employee> allDirtyRecords = new ArrayList<>();
+    private List<Employee> missingValueRecords = new ArrayList<>();
+    private List<Employee> invalidDateRecords = new ArrayList<>();
+    private List<Employee> duplicatedRecords = new ArrayList<>();
+    private List<Employee> fetchedRecords = new ArrayList<>();
     private Thread[] threads;
-    private long timeTaken;
+    private double timeTaken;
+
 
     public DataManager() {
     }
 
-    public void setupDatabase(){
+    public void setupDatabase() {
         DatabaseInit.init();
     }
-    public void createThreads(){
-        CustomThreadFactory customThreadFactory=new CustomThreadFactory();
-      //  threads[] = customThreadFactory.customThreadFactory(threadCount,cleanRecords);
+
+    public void createThreads() {
+        CustomThreadFactory customThreadFactory = new CustomThreadFactory();
+        threads = customThreadFactory.customThreadFactory(threadCount,cleanRecords);
     }
-    public void addToDatabase(){
+
+    public void getEmployeeFromDatabase() {
+        DAO dataAccess = new EmployeeDAO();
+        fetchedRecords = dataAccess.getAll();
+    }
+
+    // --------------------- testing adding to database
+    public void addAllToDatabase() {
+        if (threads.length<= 0 || threads ==null){
+            if (threadCount <= 0){
+                threadCount=1;
+            }
+            createThreads();
+        }
         setupDatabase();
+        System.out.println("Using " + threadCount + " threads to push to database");
         Timer timer = new Timer();
+
         timer.start();
-        for (Thread t : threads){
+        for (Thread t : threads) {
             t.start();
         }
-        for (Thread t:threads){
-            try {
-                t.join();
-            } catch (InterruptedException e) {
-                LOG.warn("Thread was interrupted.");
-                throw new RuntimeException(e);
+        boolean aliveCheck = true;
+        while(aliveCheck){
+            aliveCheck=false;
+            for(Thread t : threads){
+                if(t.isAlive()){
+                    aliveCheck=true;
+                }
             }
         }
-        timeTaken=timer.stop();
+        timeTaken =timer.stop()/1E9;
+        timeTaken= Math.floor(timeTaken * 1000) / 1000;
+        System.out.println(" Time taken to push using " + threadCount + " threads: " + timeTaken + "Seconds");
     }
-    public void getEmployeeFromDatabase(){
-        DAO dataAccess = new EmployeeDAO();
-        fetchedRecords=dataAccess.getAll();
-    }
-    // --------------------- testing adding to database
-    public void addAllToDatabase(){
+
+      /*  }
         DAO dataAccess = new EmployeeDAO();
         DatabaseInit.init();
         for (Employee e : cleanRecords){
             dataAccess.add(e);
-        }
-
-    }
-
-
+        }*/
 
     public void sortUnsortedRecords() {
         DataFilter dataFilter = new DataFilter();

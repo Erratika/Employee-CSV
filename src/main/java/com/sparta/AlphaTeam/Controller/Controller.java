@@ -39,7 +39,7 @@ public class Controller {
 
             case 5: if (dataManager.getMissingValueRecords().size()==0 || dataManager.getCleanRecords()==null){
                 System.out.println("There are no records with missing values right now.");
-            } else  displayInvalidDateRecords();
+            } else  displayMissingValueRecords();
             break;
 
             case 6: if (dataManager.getDuplicatedRecords().size()==0 || dataManager.getCleanRecords()==null){
@@ -58,6 +58,7 @@ public class Controller {
             case 9: if (dataManager.getFetchedRecords().size()==0 || dataManager.getCleanRecords()==null){
                 System.out.println("no fetched records available, ensure that records have first been retrieved from the database");
             } else  displayFetchedRecords();
+            break;
 
             case 10: collectFileToUse();
                 convertFileToEmployee();
@@ -101,19 +102,19 @@ public class Controller {
         Timer timer = new Timer();
         timer.start();
         dataManager.convertStringListToEmployee(userManager.streamReadFile(dataManager.getChosenFile().getPath()));
-        long timeOne = timer.stop();
+        double timeOne = timer.stop()/1E6;
         timer.start();
         dataManager.convertStringListToEmployee(userManager.readFile(dataManager.getChosenFile().getPath()));
-        long timeTwo = timer.stop();
-        System.out.println("\nUsing the scanner class, reading the file took: "+ TimeUnit.NANOSECONDS.toMillis(timeOne) + " nano seconds");
-        System.out.println("Using lambdas and streams, reading the file took: " + TimeUnit.NANOSECONDS.toMillis(timeTwo) + " nano seconds");
-        long difference = 0;
+        double timeTwo = timer.stop()/1E6;
+        System.out.println("\nUsing the scanner class, reading the file took: "+ Math.floor(timeOne * 1000) / 1000 + " milliseconds");
+        System.out.println("Using lambdas and streams, reading the file took: " + Math.floor(timeTwo * 1000) / 1000 + " milliseconds");
+        double difference = 0;
         if(timeOne<timeTwo){
             difference = timeTwo-timeOne;
         }else{
             difference = timeOne-timeTwo;
         }
-        System.out.println("There was a "+ TimeUnit.NANOSECONDS.toMillis(difference) + " milliseconds difference between the 2 ways to read files\n");
+        System.out.println("There was a "+ Math.floor(difference * 1000) / 1000 + " milliseconds difference between the 2 ways to read files\n");
     }
 
     public void filterRecords(){
