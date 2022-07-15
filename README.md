@@ -194,7 +194,9 @@ outputs a ``List<Employee>``
 
 ### Multithreading
 
-In this program, persisiting employee records to the database was also accomplished using a multithreading approach. A class was created known as ```CustomThreadFactory.java``` to produce threads to execute this task. This class was named as such to avoid a naming conflict with the built in ```ThreadFactory``` interface.
+In this program, persisiting employee records to the database was also accomplished using a multithreading approach. A class was created known as ```CustomThreadFactory.java``` to produce threads to execute this task. This class was named as such to avoid a naming conflict with the built in ```ThreadFactory``` interface. The class has a method inside it known as ```customThreadFactory()``` which takes a List of Employees (```List<Employee> employeeList>```) and the Number of threads (```int threadCount```) as inputs and returns an array of Threads, where each thread is assigned the task of adding a batch or array of employees to the database. 
+
+
 
 ### Lambdas
 
