@@ -74,8 +74,8 @@ public class UserManager {
             int userValue=0;
             while (userChoosing) {
                 System.out.println("you may choose a new operation by typing its' number: \n1. View clean records \n2. View unsorted records" +
-                                "\n3. view all dirty records\n4. view records with invalid date\n5. view records witH missing fields\n" +
-                        "6. view records with an incorrect date\n7. push clean records to the database\n8. retrieve records from database\n9. view records received from database\n10. choose a new file\n11. choose thread count\n12. quit");
+                                "\n3. view all dirty records\n4. view records with invalid date\n5. view records with missing fields\n" +
+                        "6. view duplicate records\n7. push clean records to the database\n8. retrieve records from database\n9. view records received from database\n10. choose a new file\n11. choose thread count\n12. quit");
                 userValue= StringConverter.stringToInt(scanner.next()); // uses converter to only return a positive int, and loop refuses a null array.
                 if (userValue>=1 && userValue<=12){
                     userChoosing=false;
