@@ -22,13 +22,13 @@ public class DataManager {
     private List <Employee> duplicatedRecords=new ArrayList<>();
     private List<Employee> fetchedRecords= new ArrayList<>();
     private Thread[] threads;
-    private long timeTaken;
+    private double timeTaken;
 
     public DataManager() {
     }
 
     public void setupDatabase(){
-        DatabaseInit.makeTable();
+        DatabaseInit.init();
     }
     public void createThreads(){
         CustomThreadFactory customThreadFactory=new CustomThreadFactory();
@@ -57,7 +57,7 @@ public class DataManager {
     // --------------------- testing adding to database
     public void addAllToDatabase(){
         DAO dataAccess = new EmployeeDAO();
-        DatabaseInit.makeTable();
+        DatabaseInit.init();
         for (Employee e : cleanRecords){
             dataAccess.add(e);
         }

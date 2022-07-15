@@ -1,12 +1,12 @@
 package com.sparta.AlphaTeam.core;
 
 public class Timer {
-	long start;
+	double start;
 
 	public void start(){
 		start = System.nanoTime();
 	}
-	public long stop(){
+	public double stop(){
 		return System.nanoTime() - start;
 	}
 }

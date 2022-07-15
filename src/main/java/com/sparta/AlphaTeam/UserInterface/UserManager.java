@@ -13,11 +13,11 @@ import java.util.Scanner;
 public class UserManager {
 
     public void intro(){
-        promt("welcome to the file management and storage application! \n \n First, you will need to select a file");
+        promt("Welcome to the file management and storage application!\n\nFirst, you will need to select a file");
     }
-    public void userChoicePanel(){
+    public int userChoicePanel(){
         promt("your operation was successful!");
-
+        return ChooseTools.actionChoice();
     }
 
     public void displayRecords(List<Employee> listToRead){
@@ -27,6 +27,9 @@ public class UserManager {
     }
     public List<String> readFile(String filePath){
         return Reader.readFile(filePath);
+    }
+    public List<String> streamReadFile(String filePath){
+        return Reader.streamReadFile(filePath);
     }
 
     public void promt(String string){
@@ -69,11 +72,12 @@ public class UserManager {
             Scanner scanner = new Scanner(System.in);
             int userValue=0;
             while (userChoosing) {
-                System.out.println("you may choose a new operation by typing its' number: \n1. View clean records \n2. View unsorted records" +
-                                "\n3. view all dirty records\n4. view records with invalid date\n5.view records witH missing fields\n" +
-                        "6. view records with an incorrect date\n7. push clean records to the database\n8. retrieve records from database\n9. view records received from database\n10.choose a new file");
+                System.out.println("You may choose a new operation by typing its' number: \n1. View clean records \n2. View unsorted records" +
+                                "\n3. View all dirty records\n4. View records with invalid date\n5. View records with missing fields\n" +
+                        "6. View duplicate records\n7. Push clean records to the database\n8. Retrieve records from database\n9. View records received from database" +
+                        "\n10. Choose a new file\n11. Choose thread count\n12. Compare the efficieny of lambdas and streams to a scanner\n13. Quit");
                 userValue= StringConverter.stringToInt(scanner.next()); // uses converter to only return a positive int, and loop refuses a null array.
-                if (userValue>=1 && userValue<=10){
+                if (userValue>=1 && userValue<=13){
                     userChoosing=false;
                 }
             }
