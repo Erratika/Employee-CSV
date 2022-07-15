@@ -5,6 +5,8 @@ import com.sparta.AlphaTeam.UserInterface.UserManager;
 import com.sparta.AlphaTeam.core.FileEnum;
 import com.sparta.AlphaTeam.core.Timer;
 
+import java.util.concurrent.TimeUnit;
+
 public class Controller {
     UserManager userManager=new UserManager();
     DataManager dataManager=new DataManager();
@@ -108,7 +110,7 @@ public class Controller {
         }else{
             difference = timeOne-timeTwo;
         }
-        System.out.println("There was a "+ difference + " difference between the 2 ways to read files\n");
+        System.out.println("There was a "+ TimeUnit.NANOSECONDS.toMillis(difference) + " milliseconds difference between the 2 ways to read files\n");
     }
 
     public void filterRecords(){
