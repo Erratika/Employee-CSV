@@ -117,6 +117,10 @@ Once the application is running you will be presented with a selection of ``.csv
 
 ### Reader
 
+To read the ```.csv``` file, the class ```Reader.java``` was created. This class has two methods of reading files, one using a ```Scanner``` and the other imcorportating lambdas. 
+
+The ```readFile``` method uses a scanner to read a ```.csv``` file. It takes the file path as an input and returns the employee records as list of strings, where each line is an element of the list. The scanner skips the first line in the ```.csv``` file so that the column headings are not a part of the employee records. Each line is added into an empty String list to later form the completed ```employeeStringList```. This list is later converted from Strings to Employee objects. 
+
 ### Parsing
 
 The ``EmployeeConverter.java`` class is responsible for parsing each entry in the ``.csv`` files and creating an
@@ -206,8 +210,8 @@ To describe how the ```customThreadFactory()``` method works, it begins by creat
        
    ```
    for (int i = 1; i < threadCount; i++) {
-				threadArray[i] = new Thread(new AddTask(employeeNestedArray[i]));
-		}
+	threadArray[i] = new Thread(new AddTask(employeeNestedArray[i]));
+	}
     ```
 
 - The thread array (```threadArray```) is returned. 
@@ -253,4 +257,4 @@ Once a feature was complete it was pushed back to **_dev_** and at the end of th
 - [Kira Coke](https://github.com/kira-coke)
 - [Marc Murray](https://github.com/Erratika)
 - [Michael Alo](https://github.com/Mikesjai)
-- [Michael Matson](https://github.com/M-Matson)
+- [Michael Matson](https://github.com/M-Matson)  - Worked on ```Reader.readFile()```, Multithreading - ```CustomThreadFactory.Java``` and ```AddTask.java```. 
