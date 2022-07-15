@@ -196,7 +196,21 @@ outputs a ``List<Employee>``
 
 In this program, persisiting employee records to the database was also accomplished using a multithreading approach. A class was created known as ```CustomThreadFactory.java``` to produce threads to execute this task. This class was named as such to avoid a naming conflict with the built in ```ThreadFactory``` interface. The class has a method inside it known as ```customThreadFactory()``` which takes a List of Employees (```List<Employee> employeeList>```) and the Number of threads (```int threadCount```) as inputs and returns an array of Threads, where each thread is assigned the task of adding a batch or array of employees to the database. 
 
+To describe how the ```customThreadFactory()``` method works, it begins by creating an array of threads (```Thread[]```) with an array size equal to the thread count. To summarise the procedure of producing the thread array with assigned tasks:
 
+- ```employeeList``` is turned into an array, where it is divided into smaller arrays and each array will be assigned a thread. This division depends on the thread count. (For example a list of 12 employees and a thread count of 3 will cause the employee list to be divided into 3 smaller arrays and each array will be assigned a thread. Each smaller array will be of size 4)
+- A two dimensional array is used to store the sub-arrays called ```employeeNestedArray```. This array will have a size equal to the thread count.
+- Any remainder employees will have to be dealt with to avoid losing entire records. These individual employees are added to the first array in the ```employeeNestedArray```
+- Since the ```threadArray``` and ```employeeNestedArray``` have the same size, assigning a thread to an array of employees is as simple as 'matching-up' their indexes. 
+- The task to add the records into the database was created in a seperate class called ```AddTask.java``` which implements ```Runnable``` and has a constructor for an array of employees (```employeeArray```). Assiging the threads are as follows:
+       
+   ```
+   for (int i = 1; i < threadCount; i++) {
+				threadArray[i] = new Thread(new AddTask(employeeNestedArray[i]));
+		}
+    ```
+
+- The thread array (```threadArray```) is returned. 
 
 ### Lambdas
 
