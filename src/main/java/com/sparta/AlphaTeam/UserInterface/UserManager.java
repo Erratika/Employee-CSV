@@ -15,7 +15,7 @@ public class UserManager {
     }
     public int userChoicePanel(){
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -26,7 +26,8 @@ public class UserManager {
 
     public void displayRecords(List<Employee> listToRead){
         for (Employee e : listToRead){
-            System.out.println(e);
+            String test = String.format("%-7s%-6s%-14s%-5s%-15s%-3s%-35s%-35s%-35s %-10s", e.getId(), e.getPrefix(), e.getfName(), e.getmName(), e.getlName(),e.getGender(),e.getEmail(),e.getDateOfBirth(),e.getJoinDate(),e.getSalary());
+            System.out.println(test);
         }
     }
     public List<String> readFile(String filePath){
@@ -61,15 +62,18 @@ public class UserManager {
             int userValue=0;
             while (userChoosing) {
                 System.out.println("You may choose a new operation by typing its' number: \n" +
+                        "RECORDS______________\n"+
                         "1. View clean records \n" +
                         "2. View unsorted records\n" +
                         "3. View all dirty records\n" +
                         "4. View records with invalid date\n" +
                         "5. View records with missing fields\n" +
                         "6. View duplicate records\n" +
+                        "DATABASE___________________\n" +
                         "7. Push clean records to the database\n" +
                         "8. Retrieve records from database\n" +
                         "9. View records received from database\n" +
+                        "SELECTION / UTILITY_______________\n" +
                         "10. Choose a new file\n" +
                         "11. Choose thread count\n" +
                         "12. Compare the efficiency of lambdas and streams to a scanner\n" +

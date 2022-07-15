@@ -5,7 +5,7 @@ import java.util.List;
 public class CustomThreadFactory {
 
 
-	public void customThreadFactory(int threadCount, List<Employee> employeeList) {
+	public Thread[] customThreadFactory(int threadCount, List<Employee> employeeList) {
 		Thread[] threadArray = new Thread[threadCount];
 
 		int remainder = employeeList.toArray().length % threadCount;
@@ -29,7 +29,6 @@ public class CustomThreadFactory {
 			remainderArray[remainderArray.length - 1 - remainder] = employeeList.get(employeeList.size() - remainder);
 			remainder--;
 		}
-
 		//TODO
 		// - Assistance Required
 		// - HOW TO ASSIGN THREADS TO EMPLOYEE OBJECTS
@@ -41,6 +40,7 @@ public class CustomThreadFactory {
 			for (int j = 0; j < innerArraysSize; j++ )
 				threadArray[i] = new Thread(new AddTask(employeeNestedArray[i]));
 		}
+		return threadArray;
 	}
 }
 

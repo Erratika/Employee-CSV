@@ -21,7 +21,9 @@ public class AddTask implements Runnable{
     public void run() {
         DAO dataAccess = new EmployeeDAO();
         for (Employee e : employeeArray){
-            dataAccess.add(e);
+            if (e!=null) {
+                dataAccess.add(e);
+            }
         }
     }
 }
