@@ -17,7 +17,7 @@ public class CustomThreadFactory implements ThreadFactory {
 		return new Thread(r);
 	}
 
-	public void customThreadFactory(int threadCount, List<Employee> employeeList, Runnable r) {
+	public Thread[] customThreadFactory(int threadCount, List<Employee> employeeList, Runnable r) {
 		Thread[] threadArray = new Thread[threadCount];
 
 		int remainder = employeeList.toArray().length % threadCount;
@@ -48,14 +48,11 @@ public class CustomThreadFactory implements ThreadFactory {
 		// - IS RUNNABLE r IN METHOD SIGNATURE NEEDED?
 		//
 
-//		threadArray[0] = new Thread(remainderArray);
-//		for (int i = 1; i < threadCount; i++) {
-//			for (int j = 0; j < innerArraysSize; j++ )
-//			threadArray[i] = new Thread(employeeNestedArray[i][j]);
-//
-//
-//
-//		}
+		threadArray[0] = new Thread(new AddTask(remainderArray));
+		for (int i = 1; i < threadCount; i++) {
+				threadArray[i] = new Thread(new AddTask(employeeNestedArray[i]));
+		}
+		return threadArray;
 	}
 }
 
