@@ -26,7 +26,8 @@ public class UserManager {
         }
     }
     public List<String> readFile(String filePath){
-        return Reader.readFile(filePath);
+        //return Reader.readFile(filePath);
+        return Reader.streamReadFile(filePath);
     }
 
     public void promt(String string){
