@@ -1,4 +1,4 @@
-package com.sparta.AlphaTeam.DataManagement.Database;
+package com.sparta.AlphaTeam.DataManagement;
 import com.sparta.AlphaTeam.DataManagement.Employee;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
