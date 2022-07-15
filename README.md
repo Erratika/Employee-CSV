@@ -129,6 +129,10 @@ outputs a ``List<Employee>``
 
 ### Multithreading
 
+In this program, persisting employee records to the database was also accomplished using a multi-threading approach. A class was created to generate threads for the ```Employee``` objects known as ```CustomThreadFactory.java``` (named as such to avoid a numing conflict with the built-in ```ThreadFactory``` interface). This class contains a ```customThreadFactory``` method which takes a List of Employees (```employeeList```) and a ```threadCount``` variable with a data typeof ```int```, as inputs. The method outputs an array of Threads which have been assigned to batches of ```Employees``` with the task of adding the employees to the database. 
+
+
+
 ### Lambdas
 
 ## Testing
