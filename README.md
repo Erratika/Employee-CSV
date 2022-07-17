@@ -256,6 +256,7 @@ tasks:
 | 49ms   | 56ms       |
 | 58ms   | 62ms       |
 
+
 **File 2**
 
 | lambda | imperative |
@@ -292,21 +293,20 @@ the best result of any variance
 we used multithreading to split the workload between threads so each can push to the database and then used the timer to
 record how long the push took to complete
 
-| thread count | 1 | 3 | 5 | 6 | 7 | 10 | 100 |
-| ------------ | - | - | - | - | - | -- | --- |
-| execution and build time | 93.358 seconds | 85.374 seconds | 83.88 seconds | 83.786 seconds | 84.891 seconds | 85.952 seconds | 83.392 seconds |
-| execution time | 93.357 seconds | 85.336 seconds | 83.831 seconds | 83.739 seconds | 84.839 seconds | 85.897 seconds | 83.329 seconds |
+| Thread count             | 1              | 3              | 5              | 6              | 7              | 10             | 100            |
+|--------------------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|
+| execution and build time | 93.358 seconds | 85.374 seconds | 83.88 seconds  | 83.786 seconds | 84.891 seconds | 85.952 seconds | 83.392 seconds |
+| execution time           | 93.357 seconds | 85.336 seconds | 83.831 seconds | 83.739 seconds | 84.839 seconds | 85.897 seconds | 83.329 seconds |
 
 #### Analysis
 
-from the range of different values tested there are three conclusions that can be drawn
+From the range of different values tested there are three conclusions that can be drawn:
 
 - Using any number of threads more than one seems to be beneficial for the task
 - Uhe optimal range of threads for this example is around 5-6, however..
 - Using any number of threads more than one seems to yield barely any variation in time, 100 is as effective as 5 or 6.
 
-## Improvements
-
+ 
 ## Git Workflow
 
 We made a **_dev_** branch based off of **_master_** at the start of the project and protected **_master_** for approved
@@ -330,21 +330,24 @@ Once a feature was complete it was pushed back to **_dev_** and at the end of th
 - [Jeffrey Champion](https://github.com/Jchampion42)
     - Scrum Master
     - Worked on:
-        - Project Structure,
-        - Enumerations,
-        - User Interface,
-        - MVC and Connection of classes,
-        - Resolving issues in other members work.
+        - Project Structure.
+        - Enumerations.
+        - User Interface.
+        - MVC, ``Main.java``, ``SQLProgram.java``, ``Controller.java``, ``UserManager.java``, ``DataManager.java``.
+        - Connection of these classes to use other modules.
+        - ``ConnectionFactory.java ``and ``DatabaseInit.java`` with Marc.
+        - ``CustomThreadFactory.java``/``AddTask.java`` with Michael Matson.
+        - Test results for Markdown.
 
 - [Kira Coke](https://github.com/kira-coke)
 - [Marc Murray](https://github.com/Erratika)
     - Git Helper
     - Worked on:
-        - EmployeeConverter and EmployeeConverterTest.
-        - DAO,EmployeeDAO and EmployeeDAOTest.
+        - EmployeeConverter.java and EmployeeConverterTest.java.
+        - DAO.java,EmployeeDAO.java and EmployeeDAOTest.java.
         - Logging.
-        - ConnectionFactory and DatabaseInit with Jeffrey.
-        - README for all of the above, requirements, running and Git Workflow.
+        - ConnectionFactory.java and DatabaseInit.java with Jeffrey.
+        - README.md for all of the above, requirements, running and Git Workflow.
 - [Michael Alo](https://github.com/Mikesjai)
 - [Michael Matson](https://github.com/M-Matson)
     - Worked on ```Reader.readFile()```,
