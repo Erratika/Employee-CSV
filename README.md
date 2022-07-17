@@ -108,11 +108,6 @@
     java Main
     ```
 
-### User Guide
-
-Once the application is running you will be presented with a selection of ``.csv`` files to choose from:
-![](imgs/WelcomePrompt.PNG)
-
 ## Design
 
 ### Reader
@@ -340,14 +335,19 @@ Once a feature was complete it was pushed back to **_dev_** and at the end of th
         - Test results for Markdown.
 
 - [Kira Coke](https://github.com/kira-coke)
+    - Worked on:
+    - ``Controller.java`` with Jeffrey
+    - ``DataFilter.java`` and ``DataFilterTest.java``
+    - ``DataManagerTest.java``
+    - ``EmployeeTest.java``
 - [Marc Murray](https://github.com/Erratika)
     - Git Helper
     - Worked on:
-        - EmployeeConverter.java and EmployeeConverterTest.java.
-        - DAO.java,EmployeeDAO.java and EmployeeDAOTest.java.
+        - ``EmployeeConverter.java`` and ``EmployeeConverterTest.java``.
+        - ``DAO.java``,``EmployeeDAO.java`` and ``EmployeeDAOTest.java``.
         - Logging.
-        - ConnectionFactory.java and DatabaseInit.java with Jeffrey.
-        - README.md for all of the above, requirements, running and Git Workflow.
+        - ``ConnectionFactory.java`` and ``DatabaseInit.java`` with Jeffrey.
+        - ``README.md`` with deign details for all of the above, Requirements, running and Git Workflow.
 - [Michael Alo](https://github.com/Mikesjai)
 - [Michael Matson](https://github.com/M-Matson)
     - Worked on ```Reader.readFile()```,
