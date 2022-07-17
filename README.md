@@ -108,11 +108,6 @@
     java Main
     ```
 
-### User Guide
-
-Once the application is running you will be presented with a selection of ``.csv`` files to choose from:
-![](imgs/WelcomePrompt.PNG)
-
 ## Design
 
 ### Reader
