@@ -108,14 +108,18 @@
     java Main
     ```
 
-### User Guide
-
-Once the application is running you will be presented with a selection of ``.csv`` files to choose from:
-![](imgs/WelcomePrompt.PNG)
-
 ## Design
 
 ### Reader
+
+To read the ```.csv``` file, the class ```Reader.java``` was created. This class has two methods of reading files, one
+using a ```Scanner``` and the other incorporating lambdas.
+
+The ```readFile``` method uses a scanner to read a ```.csv``` file. It takes the file path as an input and returns the
+employee records as list of strings, where each line is an element of the list. The scanner skips the first line in
+the ```.csv``` file so that the column headings are not a part of the employee records. Each line is added into an empty
+String list to later form the completed ```employeeStringList```. This list is later converted from Strings to Employee
+objects.
 
 ### Parsing
 
@@ -194,71 +198,109 @@ outputs a ``List<Employee>``
 
 ### Multithreading
 
+In this program, persisting employee records to the database was also accomplished using a multithreading approach. A
+class was created known as ```CustomThreadFactory.java``` to produce threads to execute this task. This class was named
+as such to avoid a naming conflict with the built in ```ThreadFactory``` interface. The class has a method inside it
+known as ```customThreadFactory()``` which takes a List of Employees (```List<Employee> employeeList>```) and the Number
+of threads (```int threadCount```) as inputs and returns an array of Threads, where each thread is assigned the task of
+adding a batch or array of employees to the database.
+
+To describe how the ```customThreadFactory()``` method works, it begins by creating an array of threads (```Thread[]```)
+with an array size equal to the thread count. To summarise the procedure of producing the thread array with assigned
+tasks:
+
+- ```employeeList``` is turned into an array, where it is divided into smaller arrays and each array will be assigned a
+  thread. This division depends on the thread count. (For example a list of 12 employees and a thread count of 3 will
+  cause the employee list to be divided into 3 smaller arrays and each array will be assigned a thread. Each smaller
+  array will be of size 4)
+- A two-dimensional array is used to store the sub-arrays called ```employeeNestedArray```. This array will have a size
+  equal to the thread count.
+- Any remainder employees will have to be dealt with to avoid losing entire records. These individual employees are
+  added to the first array in the ```employeeNestedArray```
+- Since the ```threadArray``` and ```employeeNestedArray``` have the same size, assigning a thread to an array of
+  employees is as simple as 'matching-up' their indexes.
+- The task to add the records into the database was created in a separate class called ```AddTask.java``` which
+  implements ```Runnable``` and has a constructor for an array of employees (```employeeArray```). Assigning the threads
+  are as follows:
+
+   ```
+   for (int i = 1; i < threadCount; i++) {
+	threadArray[i] = new Thread(new AddTask(employeeNestedArray[i]));
+	}
+    ```
+
+- The thread array (```threadArray```) is returned.
+
 ### Lambdas
 
-## Testing
-
-### Reader
-
-### EmployeeConverter
-For testing the ``EmployeeConverter.java`` 
-
-### EmployeeDAO
-
 ## Results
-### Functional programming (Lambdas) vs imperative 
+
+### Functional Programming (Lambdas) vs Imperative
+
 - Keep the original code and then run tests to see if efficiency has improved by adding functional code.
-In response to this task, a Timer was created such that the operation to read the file in could be timed.
-two varients of the code to read the file were created, one using lambda expressions and one with imerative methods
-upon execution, the program will compare the time taken for both methods and present them to the user.
-for the three files times to read the files were tracked, and correspond as follows
-**File 1**
-- 
-| lambda | imperative |
-| ------ | ---------- |
-| 83ms | 132ms |
-| 56ms | 61ms |
-| 49ms | 56ms |
-|58ms | 62ms |
+  In response to this task, a Timer was created such that the operation to read the file in could be timed.
+  two variants of the code to read the file were created, one using lambda expressions and one with imperative methods
+  upon execution, the program will compare the time taken for both methods and present them to the user.
+  for the three files times to read the files were tracked, and correspond as follows
+  **File 1**
+
+| Lambda | Imperative |
+|--------|------------|
+| 83ms   | 132ms      |
+| 56ms   | 61ms       |
+| 49ms   | 56ms       |
+| 58ms   | 62ms       |
+
 
 **File 2**
 
 | lambda | imperative |
-| ------ | ---------- |
-| 57ms | 133ms |
-| 62ms | 73ms |
-| 50ms | 58ms |
-| 56ms | 64ms |
+|--------|------------|
+| 57ms   | 133ms      |
+| 62ms   | 73ms       |
+| 50ms   | 58ms       |
+| 56ms   | 64ms       |
 
 **File 3**
 
 | lambda | imperative |
-| ------ | ---------- |
-| 423ms | 441ms |
-| 346ms | 297ms |
-| 319ms | 377ms |
-| 295ms | 295ms |
+|--------|------------|
+| 423ms  | 441ms      |
+| 346ms  | 297ms      |
+| 319ms  | 377ms      |
+| 295ms  | 295ms      |
 
-#### analysis
- - it seems that when the program is initialised, the imperative programming is run first, but is always considerably slower.
- - this may be due to the system still warming up at this point causing the read action to be slower, it is notable in later tests for file 1 and 2 that they are much closer together
- - file 3 seems to show the most variation as it is the largest array, it is also the only occason when lambdas receive a slower result
- - due to the results for file three, the conclusion that can be drawn is that lambdas are more efficient over small tasks but it is uncertain for longer ones
- 
- ### writing file 3 to the database via multithreading
- file three is the largest of the files so using this file to test the speed of connection to the database should provide the best result of any variance
- we used multithreading to split the workload between threads so each can push to the database and then used the timer to record how long the push took to complete
- 
- | thread count | 1 | 3 | 5 | 6 | 7 | 10 | 100 |
- | ------------ | ----- | ------ | ----- | ----- | ----- |------------------| --- |
- | execution and buid time | 93.358 seconds  | 85.374 seconds | 83.88 seconds | 83.786 seconds  | 84.891 seconds | 85.952 seconds | 83.392 seconds   |
- | execution time | 93.357 seconds | 85.336 seconds | 83.831 seconds | 83.739 seconds | 84.839 seconds | 85.897 seconds | 83.329 seconds   |
- 
- #### analysis
- from the range of different values tested there are three conclusions that can be drawn
- - using any number of threads more than one seems to be beneficial for the task
- - the optimal range of threads for this example is around 5-6, however..
- - using any number of threads more than one seems to yeild barely any variation in time, 100 is as effective as 5 or 6.
+#### Analysis
+
+- It seems that when the program is initialised, the imperative programming is run first, but is always considerably
+  slower.
+- This may be due to the system still warming up at this point causing the read action to be slower, it is notable in
+  later tests for file 1 and 2 that they are much closer together
+- File 3 seems to show the most variation as it is the largest array, it is also the only occasion when lambdas receive
+  a slower result
+- Due to the results for file three, the conclusion that can be drawn is that lambdas are more efficient over small
+  tasks, but it is uncertain for longer ones
+
+### Writing file 3 to the Database via Multithreading
+
+File three is the largest of the files so using this file to test the speed of connection to the database should provide
+the best result of any variance
+we used multithreading to split the workload between threads so each can push to the database and then used the timer to
+record how long the push took to complete
+
+| Thread count             | 1              | 3              | 5              | 6              | 7              | 10             | 100            |
+|--------------------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|
+| execution and build time | 93.358 seconds | 85.374 seconds | 83.88 seconds  | 83.786 seconds | 84.891 seconds | 85.952 seconds | 83.392 seconds |
+| execution time           | 93.357 seconds | 85.336 seconds | 83.831 seconds | 83.739 seconds | 84.839 seconds | 85.897 seconds | 83.329 seconds |
+
+#### Analysis
+
+From the range of different values tested there are three conclusions that can be drawn:
+
+- Using any number of threads more than one seems to be beneficial for the task
+- Uhe optimal range of threads for this example is around 5-6, however..
+- Using any number of threads more than one seems to yield barely any variation in time, 100 is as effective as 5 or 6.
+
  
 ## Git Workflow
 
@@ -278,30 +320,37 @@ possible.
 Once a feature was complete it was pushed back to **_dev_** and at the end of the day we made a pull request from
 **_dev_** into **_master_** so that we had a clean working tree for the next day.
 
-### Git Log
-
 ## Contributors
 
 - [Jeffrey Champion](https://github.com/Jchampion42)
-- (Scrum master) 
-- primary contributions:
-    - project structure
-    - enumbers,
-    - user interface,
-    - MVC- main, sqlprogram, controller, usermanager, datamanager
-    - conenction of these classes to use other modules
-    - ConnectionFactory and DatabaseInit with Marc.
-    - CustomThreadFactory/AddTask with Michael Matson.
-    - test results for markdown
+    - Scrum Master
+    - Worked on:
+        - Project Structure.
+        - Enumerations.
+        - User Interface.
+        - MVC, ``Main.java``, ``SQLProgram.java``, ``Controller.java``, ``UserManager.java``, ``DataManager.java``.
+        - Connection of these classes to use other modules.
+        - ``ConnectionFactory.java ``and ``DatabaseInit.java`` with Marc.
+        - ``CustomThreadFactory.java``/``AddTask.java`` with Michael Matson.
+        - Test results for Markdown.
 
 - [Kira Coke](https://github.com/kira-coke)
+    - Worked on:
+    - ``Controller.java`` with Jeffrey
+    - ``DataFilter.java`` and ``DataFilterTest.java``
+    - ``DataManagerTest.java``
+    - ``EmployeeTest.java``
 - [Marc Murray](https://github.com/Erratika)
-  - Git Helper 
-  - Worked on:
-    - EmployeeConverter and EmployeeConverterTest.
-    - DAO,EmployeeDAO and EmployeeDAOTest.
-    - Logging.
-    - ConnectionFactory and DatabaseInit with Jeffrey.
-    - README for a majority of above, requirements, running and Git Workflow.
+    - Git Helper
+    - Worked on:
+        - ``EmployeeConverter.java`` and ``EmployeeConverterTest.java``.
+        - ``DAO.java``,``EmployeeDAO.java`` and ``EmployeeDAOTest.java``.
+        - Logging.
+        - ``ConnectionFactory.java`` and ``DatabaseInit.java`` with Jeffrey.
+        - ``README.md`` with deign details for all of the above, Requirements, running and Git Workflow.
 - [Michael Alo](https://github.com/Mikesjai)
 - [Michael Matson](https://github.com/M-Matson)
+    - Worked on ```Reader.readFile()```,
+    - Multithreading
+        - ```CustomThreadFactory.Java```
+        - ```AddTask.java```. 
